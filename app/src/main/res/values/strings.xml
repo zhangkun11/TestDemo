@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="screentest_name">屏幕测试</string>
+    <string name="gpstest_name">定位测试</string>
+    <string name="photo_name">拍照测试</string>
+    <string name="meter_name">红外测试</string>
+    <string name="take_photo">拍照</string>
+</resources>

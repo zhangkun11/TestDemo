@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="info_success">成功</string>
+    <string name="info_failed">失败</string>
+    <string name="info_validation_success">验证成功</string>
+    <string name="info_validation_failed">验证失败</string>
+    <string name="button_hw">红外测试</string>
+    <string name="button_electric">电力抄表</string>
+    <string name="electric_title">抄表导航</string>
+    <string name="scan_setup">扫描设置 </string>
+    <string name="scan_suffix">扫描后缀</string>
+    <string name="scan_suffix_enter">回车</string>
+    <string name="scan_type_null">MODEL_UNKONW</string>
+	<string name="scan_type_0">MODEL_N4313</string>
+	<string name="scan_type_1">MODEL_SE955</string>
+	<string name="scan_type_2">MODEL_EM3095</string>
+	<string name="scan_type_3">MODEL_EM3070</string>
+	<string name="scan_type_4">MODEL_N3680</string>
+    <string name="scan_suffix_semicolon">分号</string>
+    <string name="scan_net_page_support">支持网页扫描</string>
+    <string name="scan_continue_start_scan">开始扫描</string>
+    <string name="scan_continuse_scan_set">请设置扫描间隔,单位毫秒(最低为%1$s毫秒)</string>
+    <string name="scan_suffix_none">没有</string>
+    <string name="scan_choice_info">第一次使用请选择扫描头类型</string>
+    <string name="button_caobiao">红外抄表</string>
+    <string name="position">位置</string>
+    <string name="button_psam">PSAM卡</string>
+    <string name="button_exit">退出</string>
+    <string name="navi_title">导航</string>
+    <string name="button_iccard">IC卡</string>
+    <string name="UHF">超高频</string>
+    <string name="electrictorch">闪光灯</string>
+     <string name="flash">手电筒</string>
+    <string name="button_t485">485抄表</string>
+    <string name="hex">16进制</string>
+    <string name="please_input_hex_str">请输入16进制字符串，如FFF23F0F</string>
+    <string name="main_one_scan">扫描</string>
+    <string name="main_two_scan">二维扫描</string>
+    <string name="main_psam">Psam卡</string>
+    <string name="device_id">设备ID号:</string>
+    <string name="gs232_title">光电通讯</string>
+    <string name="tesam_title">终端安全芯片</string>
+    <string name="rs232_title">RS232Test</string>
+    <string name="rs232_send">发送</string>
+    <string name="rs232_input_sending_str_here">输入要发送的字符串!</string>
+    <string name="rs232_cannot_send_empty_string">不能发送空字符</string>
+    <string name="rs232_data_baurate">波特率:</string>
+    <string name="rs232_data_received">接收到的数据:</string>
+    <string name="rs232_show_in_hex">十六进制显示</string>
+    <string name="main_nfc">NFC/RFID</string>
+    <string name="iccard_instruction">读取地址：0x0022,读取8字节,波特率为9600</string>
+    <string name="bluetooth_unbinde">没有绑定</string>
+    <string name="bluetooth_print">打印</string>
+    <string name="bluetooth_searching">正在搜索...</string>
+    <string name="bluetooth_connectingto">正在连接到:</string>
+    <string name="bluetooth_nodevice">设备不支持蓝牙</string>
+    <string name="bluetooth_opendevice">请开启蓝牙</string>
+    <string name="bluetooth_connect_success">成功连接到</string>
+    <string name="bluetooth_connect_failed">连接失败</string>
+    <string name="bluetooth_connection_broken">连接断开</string>
+    <string name="bluetooth_reconnect">重连</string>
+    <string name="app_name">myDemo</string>
+    <string name="app_nameNoV">HT380D_测试程序</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">扫描</string>
+    <string name="tip">请对准扫描出光口</string>
+    <string name="data">数据:</string>
+    <string name="clean">清除</string>
+    <string name="selectSamCardId">选择PSAM卡的卡槽(默认5):</string>
+    <string name="selectSamCardType">选择PSAM卡的类型:</string>
+    <string name="ResetSamCard">复位SamCard</string>
+    <string name="ChangeSamCardFrequency">修改SAM卡通讯速率为38400(需卡支持)</string>
+    <string name="ChangeSamCardHz">修改SamCard工作频率</string>
+    <string name="TypeinCosCommand">以十六进制输入Cos命令，例如：00,84,00,00,04</string>
+    <string name="TypeinCosCommand2">以十六进制输入模块命令帧和命令数据，例如：04 或 52,00,00,01</string>
+    <string name="ExecuteCosCommand">执行命令</string>
+    <string name="ResultShow">结果显示:</string>
+    <string name="nfc_background_support">开启NFC一键触发</string>
+    <string name="nfc_device_not_support">设备不支持NFC功能 </string>
+    <string name="nfc_not_open_go_open">NFC未开启，现在去开启吗?</string>
+    <string name="nfc_not_open">NFC未开启</string>
+    <string name="nfc_card_type">卡类型:</string>
+    <string name="nfc_card_number">卡Id:</string>
+    <string name="nfc_block_count">区块数:</string>
+    <string name="nfc_card_info">基本信息:</string>
+    <string name="nfc_operate_fan">操作的扇区:</string>
+    <string name="nfc_section_key">扇区密钥:</string>
+    <string name="nfc_read_section_data">读扇区数据</string>
+    <string name="nfc_data_readed">卡信息:</string>
+    <string name="nfc_data_writting">要写入的数据:</string>
+    <string name="nfc_write_section_data">写扇区数据</string>
+    <string name="nfc_max_command_len">最长指令长度:</string>
+    <string name="nfc_manu">制造商:</string>
+    <string name="nfc_lose_connect">NFC失去连接，请重新放置NFC</string>
+    <string name="nfc_put_card_again">请重新放置NFC</string>
+    <string name="nfc_prof">协议信息:</string>
+    <string name="nfc_block_read">读取块</string>
+    <string name="nfc_block_write">写入块</string>
+    <string name="yes">确定</string>
+    <string name="reset_success">复位Sam卡成功!</string>
+    <string name="reset_failed">复位Sam卡失败!</string>
+    <string name="change_success">生频成功!</string>
+    <string name="change_failed">生频失败!</string>
+    <string name="sethz_success">修改Sam卡功率成功!</string>
+    <string name="sethz_failed">修改Sam卡功率失败!</string>
+    <string name="psam_operator_failed">操作失败</string>
+    <string name="psam_create_random_btn">产生随机数</string>
+    <string name="psam_create_mf_btn">产生MF文件</string>
+    <string name="psam_mf_file_arealdy_exists">MF文件已存在!</string>
+    <string name="psam_mf_file_create_success">MF文件创建成功！!</string>
+    <string name="main_infrared">红外测试</string>
+    <string name="send_info">发送数据</string>
+    <string name="baudrate">波特率:</string>
+    <string name="HexShow">十六进制显示</string>
+    <string name="data_send">要发送的数据:(十六进制，如:fefefefe68aaaaaaaaaaaa68110433333433ae16)</string>
+    <string name="se955">SE955协议</string>
+    <string name="send">发送数据</string>
+    <string name="data_received">收到的数据:</string>
+    <string name="caobiao_title">485抄表</string>
+    <string name="Statute_of_the97">97规约</string>
+    <string name="statute_of_the07">07规约</string>
+    <string name="enter_address">请输入表地址</string>
+    <string name="confirm">确定</string>
+    <string name="received_data">接收到的数据</string>
+    <string name="main_caobiao">红外抄表</string>
+    <string name="chaobiao_continue_cb">自发自收</string>
+    <string name="chaobiao_continue_start">开始抄表</string>
+    <string name="chaobiao_continuse_set">请设置抄表间隔(单位为毫秒)</string>
+    <string name="Please_select_Infrared_order">请选择一个红外指令！</string>
+    <string name="address_length_cross_border">表地址长度越界！</string>
+    <string name="not_received_data">没有收到数据</string>
+    <string name="Generated_time">生成时间:</string>
+    <string name="main_camera">相机</string>
+    <string name="button_light">闪光灯</string>
+    <string name="button_gps">GPS</string>
+    <string name="button_rs232">RS232</string>
+    <string name="button_bluetooth_printer">蓝牙打印</string>
+    <string name="bluetooth_title">BluetoothPrinter</string>
+    <string name="operating_wait">初始化中，请稍后</string>
+    <!-- 蓝牙打印 -->
+    <string name="blue_print">蓝牙打印</string>
+    <string name="open_bluetooth">检测到蓝牙没有打开，是否打开蓝牙？</string>
+    <string name="open_blue">打开蓝牙</string>
+    <string name="opening">正在打开蓝牙····</string>
+    <string name="cancel">取消</string>
+    <string name="Local_Bluetooth_address">本地蓝牙地址：</string>
+    <string name="connect_success">连接成功!</string>
+    <string name="connect_device_s">连接设备成功！</string>
+    <string name="connect_device_f">连接设备失败！</string>
+    <string name="Status_un">状态：未配对</string>
+    <string name="connecting_device">正在连接设备···</string>
+    <string name="connected_device">设备已连接</string>
+    <string name="Complete_the_pairing">完成配对</string>
+    <string name="Device_has_been_disconnected">已断开设备连接</string>
+    <string name="Connection_fails_ensure">连接失败，确保设备蓝牙功能正常，再重新连接！</string>
+    <string name="bluetooth_notice">提示：</string>
+    <string name="not_connected_to_the_print_device">没有连接到打印设备</string>
+    <string name="Please_turn_on_Bluetooth">请先打开蓝牙</string>
+    <string name="Bluetooth_is_turned_off">蓝牙已关闭···</string>
+    <string name="Looking_for_devices">正在查找设备···</string>
+    <string name="Status_Paired">状态：已配对</string>
+    <string name="input_data_to_be_printed">在此输入要打印的数据</string>
+    <string name="Waiting_for_connection">等待连接</string>
+    <string name="Reenter">重新输入</string>
+    <string name="Search_for_devices">搜索设备</string>
+    <string name="Print_data">打印</string>
+    <string name="device_list">设备列表</string>
+    <string name="device_name">设备名：</string>
+    <string name="mac_address">MAC地址：</string>
+    <string name="open">开启</string>
+    <string name="gps_test">GPS测试</string>
+    <string name="led_close">关灯</string>
+    <string name="led_open">开灯</string>
+    <string name="gps_does_not_open">GPS未开启</string>
+    <string name="button_nfc">NFC</string>
+
+    <!-- ICCard -->
+    <string name="iccard_r_9000">操作成功！</string>
+    <string name="iccard_r_9001">操作成功！使用 T=1协议(只有执行复位指令时会返回)</string>
+    <string name="iccard_r_9010">操作成功！使用synchronous协议(只有执行复位指令时会返回)。请设置卡类型</string>
+    <string name="iccard_r_6001">请设置卡类型</string>
+    <string name="iccard_r_6002">读卡器中没有卡</string>
+    <string name="iccard_r_6003">卡类型设置错误</string>
+    <string name="iccard_r_6004">卡没有上电，或者卡已被移除</string>
+    <string name="iccard_r_6005">无效的指令</string>
+    <string name="iccard_r_6020">操作卡失败</string>
+    <string name="iccard_r_6022">Short circuit at card connector</string>
+    <string name="iccard_r_6201">密钥验证失败</string>
+    <string name="iccard_r_6701">卡类型不支持的指令</string>
+    <string name="iccard_r_6702">卡地址错误</string>
+    <string name="iccard_r_6703">数据长度错误</string>
+    <string name="iccard_r_6704">返回数据长度无效 (只有在执行读指令时可能返回)</string>
+    <string name="iccard_r_6705">密钥指令已锁</string>
+    <string name="iccard_r_6712">APDU command aborted;the command abortion may be caused by a card internal failure.</string>
+    <string name="iccard_r_parser">数据解析错误</string>
+    <string name="iccard_r_failed">操作失败</string>
+    <string name="iccard_r_success">操作成功！</string>
+    <string name="iccard_hex_eight_byte">输入十六进制字符串(八个字节)</string>
+    <string name="iccard_write">写</string>
+    <string name="iccard_read">读</string>
+    <string name="iccard_poweron">卡上电</string>
+    <string name="iccard_poweroff">卡下电</string>
+    <string name="iccard_clean">清除</string>
+    <string name="iccard_getcardid">获取卡号</string>
+    <string name="iccard_invalid_data">无效数据</string>
+    <string name="iccard_too_long">数据太长(八字节)</string>
+    <string name="iccard_r_0505">发送错误</string>
+    <string name="iccard_setcardtype">SLE4432</string>
+    <string name="iccard_notice">提示：</string>
+    <string name="scan_continue_cb">连续扫描</string>
+    <string name="rs232_hexstring">16进制</string>
+    <string name="rs232_data_bits">数据位:</string>
+    <string name="rs232_even_bits">校验:</string>
+    <string name="rs232_stop_bits">停止位:</string>
+    <string name="uhf_combined_link">链路组合:</string>
+    <string name="uhf_power">功率:</string>
+    <string name="uhf_power_hint">5~30</string>
+    <string name="uhf_dbm">dBm</string>
+    <string name="uhf_setup">设置</string>
+    <string name="uhf_d_setup">频点设置</string>
+    <string name="uhf_area_setting">区域设置</string>
+    <string name="uhf_power_tips">改变功率可以改变通信距离</string>
+    <string name="uhf_find_card">巡卡</string>
+    <string name="uhf_stop_find_card">停止</string>
+    <string name="uhf_find_times">次数</string>
+    <string name="uhf_find_tid">查询TID</string>
+    <string name="uhf_get_area">获取区域设置</string>
+    <string name="uhf_get_reflection">获取反射功率</string>
+    <string name="uhf_get_device_info">获取设备信息</string>
+    <string name="uhf_read_or_write">读/写</string>
+    <string name="uhf_oprate_area">操作区域:</string>
+    <string name="uhf_epc">EPC</string>
+    <string name="uhf_tid">TID:</string>
+    <string name="uhf_usr">USR</string>
+    <string name="uhf_epc_hint">过滤EPC(完整的EPC号):</string>
+    <string name="uhf_pwd">密钥:</string>
+    <string name="uhf_pwd_hint">双字(4字节)，默认为0x00000000</string>
+    <string name="uhf_start_address">起始地址:</string>
+    <string name="uhf_start_address_hint">双字节,(epc只能从2开始写),16进制表示</string>
+    <string name="uhf_read_length">读取长度:</string>
+    <string name="uhf_read_length_hint">单位为字(双字节)</string>
+    <string name="uhf_write_content">写入内容:</string>
+    <string name="uhf_write_content_hint">16进制,4的倍数</string>
+    <string name="uhf_read">读取</string>
+    <string name="uhf_write">写入</string>
+    <string name="uhf_msg_return">信息反馈:</string>
+    <string name="uhf_power_format_error">功率格式错误</string>
+    <string name="uhf_power_can_not_be_null">功率不能为空</string>
+    <string name="uhf_key_error">密钥错误</string>
+    <string name="uhf_read_length_invail">读取长度无效</string>
+    <string name="uhf_address_invail">无效地址</string>
+    <string name="uhf_epc_invail">无效epc</string>
+    <string name="uhf_input_key">请输入密钥</string>
+    <string name="uhf_write_data_can_not_be_null">写入数据不能为空</string>
+    <string name="uhf_write_data_not_be_right">写入数据不和规范</string>
+    <string name="uhf_version">固件版本:</string>
+    <string name="uhf_model_id">模块ID:</string>
+    <string name="uhf_open_loop">开环</string>
+    <string name="uhf_close_loop">闭环</string>
+    <string name="uhf_error">错误</string>
+    <string name="uhf_antenna">天线</string>
+    <string name="uhf_read_power">读功率</string>
+    <string name="uhf_write_power">写功率</string>
+    <string name="uhf_check_error">通信帧校验码错误</string>
+    <string name="uhf_find_card_failed">巡卡失败</string>
+    <string name="uhf_reflection_power_over">反射功率过大</string>
+    <string name="uhf_tep_too_heigh">温度过高</string>
+    <string name="uhf_error_default">操作失败</string>
+    <string name="uhf_setup_success">设置成功</string>
+    <string name="uhf_setup_failed">设置失败</string>
+    <string name="uhf_read_success">读取成功:</string>
+    <string name="uhf_read_failed">读取失败:</string>
+    <string name="uhf_write_success">写入成功!!!</string>
+    <string name="uhf_write_failed">写入失败!</string>
+    <string name="uhf_power_off_save">断电保存</string>
+    <string name="uhf_search_times_hint">巡卡次数,默认为1</string>
+    <string name="uhf_times">次</string>
+    <string name="uhf_data_is_out_of_limit">数据不在范围内</string>
+    <string name="uhf_no_card_find">当前没有巡到卡</string>
+    <string name="uhf_no_tid_find">当前没有检测打到TID</string>
+    <string name="uhf_reflection_power">反射功率:</string>
+    <string name="uhf_mode1">联云星UHF</string>
+    <string name="uhf_mode2">芯联UHF</string>
+    <string name="uhf_mode3">皖杰UHF</string>
+    <string name="uhf_mode_error">没有检测到配置表，请确保烧入配置表信息！</string>
+    <string name="uhf_area_hint">该模块只支持设置902-928与920-925段!</string>
+
+    <!-- Scan -->
+    <string name="scan_start_open_support">开机自启动服务</string>
+    <string name="scan_out_mode">扫描输出模式</string>
+    <string name="scan_out_mode_1">快速扫描模式（可在文本输入框输出）</string>
+    <string name="scan_out_mode_2">模拟键盘模式（模拟物理按键输出）</string>
+    <string name="scan_out_mode_3">广播模式（二次开发广播控制）</string>
+    <string name="scan_effect">扫描结果提醒方式</string>
+    <string name="scan_effect_sound">声音提醒</string>
+    <string name="scan_effect_vibration">震动提醒</string>
+    <string name="scan_shortcut_support">支持扫描快捷键扫描</string>
+    <string name="scan_shortcut_mode">扫描快捷键按键模式</string>
+    <string name="shortcut_mode_1">3秒后自动收光</string>
+    <string name="shortcut_mode_2">抬起按键收光</string>
+    <string name="scan_shortcut_1">左侧橙色键</string>
+    <string name="scan_shortcut_2">中间橙色键</string>
+    <string name="scan_shortcut_3">右侧橙色键</string>
+    <string name="scan_model">扫描头类型选择</string>
+    <string name="scan_model_em3070">em3070</string>
+    <string name="scan_model_em3095">em3095</string>
+    <string name="scan_model_n4313">n4313</string>
+    <string name="scan_model_se955">se955</string>
+    <string name="scan_test">扫描数据</string>
+    <string name="scan_result_count">统计分析(连续扫描)</string>
+    <string name="scan_save_txt_support">保存至TXT文本(/sdcard/Scan Record)</string>
+    <string name="scan_return_factory">恢复出厂设置</string>
+    <string name="scan_model_tpey">扫描引擎类型</string>
+    <string name="scan_model_one">一维扫描引擎</string>
+    <string name="scan_model_two">二维扫描引擎</string>
+	<string name="scan_model_nofind_info">没有检测到配置表，请确保烧入配置表信息！</string>
+	<string name="scan_init_failure_info">扫描头协议写入失败，请重试!</string>
+    
+    <string name="nfc_out_mode_1">文本框广播模式</string>
+    <string name="nfc_out_mode_2">模拟键盘模式</string>
+    
+    <!-- SimpleIc -->
+    <string name="simpleic_test">简易IC(UART)</string>
+    <string name="simple_reset">复位</string>
+    <string name="simple_test1">读取 8字节芯片序列号</string>
+    <string name="simple_test2">读取 1字节芯片状态</string>
+    <string name="simple_test3">读取 4字节剩余红外认证次数</string>
+    <string name="simple_test4">获取芯片随机数</string>
+    <string name="simple_result">结果显示</string>
+    
+    
+    <string name="power_tesam_no">获取芯片序列号</string>
+    <string name="power_tesam_counter">获取离线计数器</string>
+    <string name="power_tesam_checkstate">获取芯片状态信息 </string>
+    <string name="power_tesam_certificate">获取证书序列号</string>
+    <string name="power_tesam_version">获取密钥版本</string>
+    
+    <string name="power_sercurity">邮票孔安全单元</string>
+    <string name="power_sercurity_checkstate">查询安全单元状态</string>
+    <string name="power_sercurity_checkversion">查询安全单元版本</string>
+    <string name="power_sercurity_checkcard1">获取操作员状态</string>
+    <string name="power_sercurity_checkcard2">获取业务卡状态</string>
+    <string name="power_sercurity_success">获取卡号成功</string>
+    <string name="power_sercurity_checkcard3">安全单元与业务卡同步</string>
+    <string name="power_synchronize_success">同步成功</string>
+    <string name="info_abnormal">异常</string>
+    <!-- NFC -->
+    <!-- Common stuff -->
+    <string name="app_version">App Version</string>
+
+    <!-- Activity titles -->
+    <string name="title_activity_main">NFC_Mifare_Classic_Tool</string>
+    <string name="title_activity_read_tag">阅读标签</string>
+    <string name="title_activity_dump_editor">转储编辑</string>
+    <string name="title_activity_access_conditions">准入条件</string>
+    <string name="title_activity_write_tag">写标签</string>
+    <string name="title_activity_create_key_map">地图键环节</string>
+    <string name="title_activity_file_chooser">文件选择器</string>
+    <string name="title_activity_value_blocks">值块的整数</string>
+    <string name="title_activity_key_editor">关键编辑</string>
+    <string name="title_activity_help">帮助和信息</string>
+    <string name="title_activity_hex_to_ascii">数据为ASCII</string>
+    <string name="title_activity_tag_info">标签信息</string>
+    <string name="title_activity_value_block_tool">值块解码器
+        &amp; 编码器</string>
+    <string name="title_activity_access_condition_tool">访问条件
+解码器 &amp; 编码器</string>
+    <string name="title_activity_preferences">偏好</string>
+
+    <!-- Texts (labels etc.) -->
+    <string name="text_choose_key_file">选择一些关键文件:</string>
+    <string name="text_wait_read_tag">读标签&#8230;\n(Don\'t remove tag)</string>
+    <string name="text_key_map_progress">键映射的进步:</string>
+    <string name="text_sector">扇区</string>
+    <string name="text_block">块</string>
+    <string name="text_caption_title">解说词</string>
+    <string name="text_keya">KeyA</string>
+    <string name="text_keyb">KeyB</string>
+    <string name="text_ac">ACs</string>
+    <string name="text_uid">UID</string>
+    <string name="text_uid_and_manuf">UID &amp; ManufInfo</string>
+    <string name="text_valueblock">ValueBlock</string>
+    <string name="text_chooser_info_text">选择文档:</string>
+    <string name="text_open_dump_title">打开标签转储</string>
+    <string name="text_no_files_in_chooser">没有找到文件</string>
+    <string name="text_ac_read">读取:</string>
+    <string name="text_ac_write">写入:</string>
+    <string name="text_ac_incr">增加.:</string>
+    <string name="text_ac_decr">Decr./Trans./Rest.:</string>
+    <string name="text_ac_pos">Location:</string>
+    <string name="text_ac_error">错误：此配置
+不知道</string>
+    <string name="text_vb_what">什么:</string>
+    <string name="text_vb_value">价值:</string>
+    <string name="text_vb_orig">原:</string>
+    <string name="text_vb_as_int_decoded">为整数:</string>
+    <string name="text_sector_range">创建主要的扇区:</string>
+    <string name="text_sector_range_all">全部</string>
+    <string name="text_update_colors">更新颜色</string>
+    <string name="text_data">数据:</string>
+    <string name="text_write_dump_info">写一堆（或它的某些扇区）对
+一个标签。含有未知数据块将被跳过（---）！</string>
+    <string name="text_factory_format_info">试图格式化标签
+厂/交货状态</string>
+    <string name="text_starting_at_0">（0开始）</string>
+    <string name="text_open_key_file_title">打开或创建一个密钥文件</string>
+    <string name="text_choose_dump_to_write">选择转储是书面的:</string>
+    <string name="text_from">从</string>
+    <string name="text_to">到</string>
+    <string name="text_key_a">Key A</string>
+    <string name="text_key_b">Key B</string>
+    <string name="text_key_ab">Key A|B</string>
+    <string name="text_never">从不</string>
+    <string name="text_keys_not_known">密钥 (A and B) 不知道</string>
+    <string name="text_block_read_only">块是只读的</string>
+    <string name="text_write_key_a_not_known">关键的写访问（Ａ密钥）
+不知道</string>
+    <string name="text_write_key_b_not_known">关键的写访问（Ｂ密钥）
+不知道</string>
+    <string name="text_ac_read_only">准入条件是只读的</string>
+    <string name="text_keys_read_only">钥匙（A和B）是只读的</string>
+    <string name="text_invalid_ac_or_sector_dead">无效的访问条件或
+死界 :(</string>
+    <string name="text_strange_error">发生了一些奇怪的错误:(</string>
+    <string name="text_no_mfc_support_device">此设备不
+支持Mifare Classic!</string>
+    <string name="text_no_mfc_support_tag">不读经典的标签！</string>
+    <string name="text_no_tag">没有读经典的标签.</string>
+    <string name="text_generic_info">通用的信息</string>
+    <string name="text_mf_info">Mifare经典信息</string>
+    <string name="text_rf_tech">RF Technology</string>
+    <string name="text_rf_tech_14a">ISO/IEC 14443, Type A</string>
+    <string name="text_atqa">ATQA</string>
+    <string name="text_sak">SAK</string>
+    <string name="text_ats">ATS</string>
+    <string name="text_tag_type_and_manuf">Tag Type and Manufacturer</string>
+    <string name="text_tag_type_guess">\"Tag Type and Manufacturer\" might be
+        wrong.\nSee \"Help and Info\" for more information.</string>
+    <string name="text_mem_size">Memory Size</string>
+    <string name="text_block_size">Block Size</string>
+    <string name="text_sector_count">Number of Sectors</string>
+    <string name="text_block_count">Number of Blocks</string>
+    <string name="text_vb">VB:</string>
+    <string name="text_vb_as_int">VB as Int:</string>
+    <string name="text_addr">Addr:</string>
+    <string name="text_copy">Copy</string>
+    <string name="text_paste">Paste</string>
+    <string name="text_share_subject_dump">MCT Dump</string>
+    <string name="text_share_subject_key_file">MCT Key File</string>
+    <string name="text_option_info">Info to option</string>
+    <string name="text_static_ac_default">08778F</string>
+    <string name="text_no_key_io_error">No keys found (or dead sector)</string>
+    <string name="text_ac_label">ACs:</string>
+    <string name="text_block_0">Block 0 (0-4):</string>
+    <string name="text_block_1">Block 1 (5-9):</string>
+    <string name="text_block_2">Block 2 (10-14):</string>
+    <string name="text_block_3">Block 3 (15) - Sector Trailer:</string>
+    <string name="text_step_1_sector_trailer">Step 1:
+        Choose ACs for Sector Trailer</string>
+    <string name="text_step_2_data_blocks">Step 2:
+        Choose ACs for Data Blocks</string>
+
+    <!-- Actions (Buttons, Checkboxs, etc. -->
+    <string name="action_read_write">读写S50/S70卡</string>
+    <string name="action_read_tag">读取标签</string>
+    <string name="action_write_tag"> 写入标签 </string>
+    <string name="action_edit_tag_dump">Edit/Analyse Dump File</string>
+    <string name="action_edit_key_dump">Edit/Add Key File</string>
+    <string name="action_tools">Tools</string>
+    <string name="action_exit_app">Exit App</string>
+    <string name="action_nfc">Goto NFC Settings</string>
+    <string name="action_create_key_map">开始读取标签数据</string>
+    <string name="action_create_key_map_and_read">Start Mapping and
+        Read Tag</string>
+    <string name="action_help">Help and Info</string>
+    <string name="action_editor_only">Use Only As Editor</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">返回</string>
+    <string name="action_choose_file">Choose Selected File</string>
+    <string name="action_open_dump_file">Open Dump File</string>
+    <string name="action_change">选择</string>
+    <string name="action_read_all_sectors">读取所有扇</string>
+    <string name="action_write_block">写入扇区</string>
+    <string name="action_create_key_map_and_write_block">Start Mapping and
+        Write Block</string>
+    <string name="action_create_key_map_and_write_dump">启动映射和写入</string>
+    <string name="action_create_key_map_and_factory_format">开始测绘和格式标签</string>
+    <string name="action_write_full_dump">Select Dump</string>
+    <string name="action_i_know_what_i_am_doing">I know what I\'m doing</string>
+    <string name="action_open_key_file">Open Key File</string>
+    <string name="action_select_all">查询全部</string>
+    <string name="action_select_none">取消查询全部</string>
+    <string name="action_cancel_all">Cancel Writing</string>
+    <string name="action_skip_blocks">Write as Much as Possible</string>
+    <string name="action_more">Read More&#8230;</string>
+    <string name="action_decode">Decode</string>
+    <string name="action_encode">Encode</string>
+    <string name="action_wirte_block">写入扇区块</string>
+    <string name="action_write_dump_clone">Write Dump (Clone)</string>
+    <string name="action_write_dump">Write Dump</string>
+    <string name="action_factory_format">Factory Format</string>
+    <string name="action_write_mfid">Advanced: Enable writing to
+        manufacturer block</string>
+    <string name="action_show_options">Show Options</string>
+    <string name="action_static_ac">Use these Access Conditions for all
+        sectors:</string>
+    <string name="action_auto_reconnect">Advanced: Auto reconnect if tag gets
+        lost during the key mapping process</string>
+    <string name="action_save_last_key_files">Remember the last selected key
+        files (key mapping dialog)</string>
+    <string name="action_save">Save</string>
+    <string name="action_share">Share</string>
+    <string name="action_data_as_ascii">Data as ASCII</string>
+    <string name="action_decode_ac">Decode Access Conditions</string>
+    <string name="action_show_value_blocks_as_int">Value Blocks as Int.</string>
+    <string name="action_show_tag_info">Display Tag Info</string>
+    <string name="action_show_vb_tool">Value Block De-/Encoder</string>
+    <string name="action_show_ac_tool">Access Condition De-/Encoder</string>
+    <string name="action_create_new_file">Create New File</string>
+    <string name="action_delete_file">Delete File</string>
+    <string name="action_remove_duplicates">Remove Duplicates</string>
+    <string name="action_show_preferences">Preferences</string>
+    <string name="action_show_about">About</string>
+    <string name="action_decode_manuf_date">Decode date of manufacture</string>
+    <string name="action_replace">Replace</string>
+    <string name="action_append">Append</string>
+    <string name="action_do_not_show_again">Do not show this message
+        again</string>
+    <string name="action_beer_sounds_fine">Beer sounds fine
+        (Donate via Google Play)</string>
+
+    <!-- Toast messages -->
+    <string name="info_new_tag_found">新的标签发现</string>
+    <string name="info_no_external_storage">错误：外部存储不是可读/写</string>
+    <string name="info_no_tag_found">错误：没有MIFARE经典标签</string>
+    <string name="info_wait_key_map">Creating key map&#8230;
+        Please wait&#8230;</string>
+    <string name="info_tag_removed_while_reading">Error: Tag removed
+        during reading</string>
+    <string name="info_no_vb_in_dump">There are no value blocks in this dump</string>
+    <string name="info_valid_dump_not_hex">Error: Some block(s) contain
+        invalid data (not hex)</string>
+    <string name="info_valid_dump_not_4_or_16_lines">Error: Some
+        sectors don\'thave 4 or 16 blocks (lines)</string>
+    <string name="info_valid_dump_not_16_bytes">Error: Some blocks
+        don\'t have 16 bytes (32 characters)</string>
+    <string name="info_valid_dump_sector_range">Error: Sector out of range
+        (&#60; 0 or &#62; 39)</string>
+    <string name="info_valid_dump_double_sector">Error: Multiple times the
+        same sector number</string>
+    <string name="info_valid_dump_empty_dump">Error: Empty dump</string>
+    <string name="info_editor_init_error">Error: Data was not correct for this
+        editor</string>
+    <string name="info_no_dumps">There are no dumps.
+        Read a tag and save the dump</string>
+    <string name="info_invalid_range">Error in mapping range</string>
+    <string name="info_mapping_sector_out_of_range">Error in mapping range:
+        Sector out of range. Use a bigger tag.</string>
+    <string name="info_no_key_found">在选定的密钥文件中未找到有效的密钥</string>
+    <string name="info_data_location_not_set">Error: Block or sector is not
+        specified</string>
+    <string name="info_sector_out_of_range">Error: The sector is out of range</string>
+    <string name="info_block_out_of_range">Error: The block is out of range</string>
+    <string name="info_not_hex_data">Error: Data must be in hexadecimal
+        (0-9 and A-F)</string>
+    <string name="info_not_16_byte">Error: Data must be 16 bytes
+        (32 characters) long</string>
+    <string name="info_is_not_vb">Error: Not a value block.</string>
+    <string name="info_block_not_in_sector">Error: The sector does not contain
+        a block with the given number.</string>
+    <string name="info_error_writing_block">Error: Block is read-only
+        or not writable with keys from key file</string>
+    <string name="info_write_successful">Data successfully written</string>
+    <string name="info_none_key_valid_for_reading">Error: None of the
+        keys were valid for reading</string>
+    <string name="info_not_supported_now">This function is not
+        supported in this version.
+        (Maybe it will come in future versions&#8230;)</string>
+    <string name="info_valid_keys_no_keys">Error: There must be at
+        least one key</string>
+    <string name="info_valid_keys_not_hex">Error: Some key(s) contain
+        invalid data (not hex)</string>
+    <string name="info_valid_keys_not_6_byte"> Error: Some keys
+        don\'t have 6 bytes (12 characters)</string>
+    <string name="info_empty_file_name">Error: Files must have a name</string>
+    <string name="info_save_successful">Data successfully saved</string>
+    <string name="info_save_error">Error: Error while saving data</string>
+    <string name="info_file_already_exists">Error: File already exists</string>
+    <string name="info_tag_too_small">Error: Tag is too small for the
+        chosen dump</string>
+    <string name="info_write_error">Error: Some error occurred while
+        writing.\nThis could be really bad.</string>
+    <string name="info_check_ac_error">Error: Tag lost while checking for keys
+        with write privileges</string>
+    <string name="info_nothing_to_write">There is nothing left to write</string>
+    <string name="info_no_int_to_encode">Error: There is no integer
+        to be encoded</string>
+    <string name="info_addr_not_hex_byte">Error: Addr is not a hex byte
+        (0-9, A-F, 2 characters)</string>
+    <string name="info_copied_to_clipboard">Copied to clipboard</string>
+    <string name="info_invalid_int">Not a valid integer</string>
+    <string name="info_ac_not_hex">Error: Access Conditions are
+        not hex (0-9, A-F)</string>
+    <string name="info_ac_not_3_byte">Error: Access Conditions
+        have to be 3 bytes (6 characters) long</string>
+    <string name="info_file_to_big">Error: File is too big (out of memory)</string>
+    <string name="info_to_many_keys">Error: Too many keys (out of memory)</string>
+    <string name="info_ac_format_error">Error: The Access Conditions
+        are invalid</string>
+    <string name="info_ac_reset_keyb_readable">Key B is readable.
+        \nACs of data blocks have been updated.</string>
+    <string name="info_ac_reset_keyb_not_readable">Key B is not readable.
+        \nACs of data blocks have been updated.</string>
+    <string name="info_strange_error">Error: A strange error occoured&#8230;
+        and I don\'t know why :(\nPlease report this using the project page</string>
+    <string name="info_key_map_error">Error: Lost connection to the tag</string>
+    <string name="info_block0_missing">Error: There is no manufacturer block
+        (block 0)</string>
+
+    <!-- Dialog messages -->
+    <string name="dialog_no_nfc">No NFC hardware was found on your device.
+        You need NFC in order to run this App.</string>
+    <string name="dialog_nfc_not_enabled">The NFC adapter is not enabled.
+        Please go to your Settings and enable it.</string>
+    <string name="dialog_no_nfc_title">No NFC Hardware</string>
+    <string name="dialog_nfc_not_enabled_title">NFC Not Enabled</string>
+    <string name="dialog_no_mfc_support_device_title">No Mifare Classic Support</string>
+    <string name="dialog_no_mfc_support_device">Your device
+        (due to hardware) does not support Mifare Classic! The only thing
+        possible is to display the UID and some other generic
+        information. Further I/O operations are impossible.
+        \n\n<b>Therefore, this App is pretty much useless for this device.</b>        \n\nKnown devices with no Mifare Classic support:\n
+        &#8226; Google Nexus 4\n
+        &#8226; Google Nexus 5\n
+        &#8226; Google Nexus 7 (2013)\n
+        &#8226; Google Nexus 10\n
+        &#8226; Samsung Galaxy S4\n
+        &#8226; Samsung Galaxy Ace 3\n
+        &#8226; Samsung Galaxy Express 2\n
+        &#8226; Samsung Galaxy Mega\n
+        &#8226; Samsung Galaxy Note 3\n
+        &#8226; LG G2\n
+        &#8226; LG Optimus L7 II</string>
+    <string name="dialog_no_mfc_support_tag_title">Not a Mifare Classic tag</string>
+    <string name="dialog_no_mfc_support_tag">This tag is not compatible with
+        the Mifare Classic technology! Notice that this App is designed for
+        Mifare Classic tags only!
+        \n\n<b>Please use another tag.</b>        \n\n<small>(Notice: In some rare cases this message could be a false
+        positive caused by multiple tags in the reader field or strange
+        ATQA+SAK values.)</small></string>
+    <string name="dialog_save_dump_title">Save Dump</string>
+    <string name="dialog_save_dump">Enter a file name for the dump:</string>
+    <string name="dialog_mapping_range_title">Choose Range</string>
+    <string name="dialog_mapping_range">Choose the sector range for the key
+        mapping process\n(0 is the first sector):</string>
+    <string name="dialog_sector_trailer_warning_title">Writing
+        Sector Trailer</string>
+    <string name="dialog_sector_trailer_warning">You\'re about to write
+        to a sector trailer. Writing incorrect data may cause irreparable
+        damage to the tag.</string>
+    <string name="dialog_save_keys_title">Save Key File</string>
+    <string name="dialog_save_keys">Enter a file name for the key file:</string>
+    <string name="dialog_new_file_title">New File</string>
+    <string name="dialog_new_file">Enter a file name for the new file:</string>
+    <string name="dialog_first_run_title">WARNING NOTICE</string>
+    <string name="dialog_first_run">This application is dedicated
+        to users who have at least basic familiarity with the
+        Mifare Classic technology. Its features are basic and at a low
+        level. Therefore nearly all data input and output will be hexadecimal.
+        It is also important that you understand what you are doing, e.g. if
+        you write data to a tag. Writing the wrong data to certain
+        blocks may cause irreparable damage to the tag.
+        \n\n<b>FOR MORE INFORMATION AND HELP CHECK OUT THE
+        \"Help and Info\" SECTION.</b></string>
+    <string name="dialog_not_writable_title">Write Issues</string>
+    <string name="dialog_not_writable">Some parts are not writable! Check the
+        WHOLE list below.</string>
+    <string name="dialog_tools_menu_title">Available Tools</string>
+    <string name="dialog_wait_write_tag_title">Writing…</string>
+    <string name="dialog_wait_write_tag">Writing tag…\n(Don\'t remove tag)</string>
+    <string name="dialog_share_title">Send Dump File to…</string>
+    <string name="dialog_block0_writing_title">Write Manufacturer Block</string>
+    <string name="dialog_block0_writing"><b>Writing to the first block of sector 0
+        is not possible on original Mifare Classic tags.</b>        \n\nPlease make sure you are using a special tag that
+        supports writing to the manufacturer block
+        (with a normal Mifare Classic write command).
+        \n\n<b>Check out the \"Write Tag\" section from
+        \"Help and Info\" for more information.</b></string>
+    <string name="dialog_static_ac_title">Use static Access Conditions</string>
+    <string name="dialog_static_ac"><b>Replace all Access Conditions from the
+        dump with the chosen ones.</b>        \n\nThis is useful if the dump contains Access Conditions
+        that will be permanent for a tag. In case the reader does not check
+        them, you can easily use custom ones to make the tag reusable.
+        \n\n<b>WARNING: Writing incorrect data may cause irreparable
+        damage to the tag.</b></string>
+    <string name="dialog_choose_ac_title">Choose Access Conditions</string>
+    <string name="dialog_write_sectors_title">Write Sectors</string>
+    <string name="dialog_write_sectors">Select the sectors you
+        want to write:</string>
+    <string name="dialog_about_mct_title">About MCT</string>
+    <!--
+      A work around is needed for styled resources that use format strings.
+      Notice that the opening bracket is HTML-escaped, using the &lt; notation.
+      See: https://developer.android.com/guide/topics/resources/string-resource.html
+    -->
+    <string name="dialog_about_mct">&lt;b>MifareClassicTool (MCT)&lt;br />&lt;br />
+        &#8226; Version: %1$s&lt;br />
+        &#8226; License:
+        &lt;a href="https://www.gnu.org/licenses/gpl-3.0.txt">GPLv3&lt;/a>&lt;br />
+        &#8226; Project Page:
+        &lt;a href="https://github.com/ikarus23/MifareClassicTool">MCT
+        on github&lt;/a>&lt;br />
+        &#8226; Rate this app:
+        &lt;a href="market://details?id=de.syss.MifareClassicTool">via
+        Google Play&lt;/a>&lt;br />
+        &#8226; Donate:
+        &lt;a href="market://details?id=de.syss.MifareClassicToolDonate">via
+        Google Play&lt;/a>&lt;/b>&lt;br />&lt;br />
+        Useful information:&lt;br />
+        &#8226; &lt;a href="https://github.com/ikarus23/MifareClassicTool/issues">Bug
+        Tracker&lt;/a>&lt;br />
+        &#8226; &lt;a href="https://raw2.github.com/ikarus23/MifareClassicTool/master/CHANGELOG.txt">Changelog
+        / Version History&lt;/a>&lt;br />
+        &#8226; &lt;a href="http://publications.icaria.de/mct/">Documentation,
+        APKs, etc.&lt;/a>&lt;br />
+        &#8226; &lt;a href="http://www.proxmark.org/forum/viewtopic.php?id=1535">Thread
+        at the Proxmark forum&lt;/a></string>
+    <string name="dialog_auto_reconnect_title">Auto Reconnect</string>
+    <string name="dialog_auto_reconnect">If the tag gets lost during
+        the key mapping process (due to antenna issues, timeout, etc.),
+        the app will try to reconnect to it (with a delay of 500ms)
+        until one attempt succeeds.
+        \n\n<b>This may help if you encounter issues during the key mapping
+        process. However, it might also cause MCT to behave strangely.</b>        \n\nKnown issues where this setting may help:\n
+        &#8226; Special tags (e.g. smartMX)</string>
+    <string name="dialog_date_of_manuf_title">Date of manufacture</string>
+    <string name="dialog_date_of_manuf">The tag was manufacured between
+        &lt;b>%1$s&lt;/b> and &lt;b>%2$s&lt;/b>.&lt;br />&lt;br />
+        (This information might be wrong. See \"Help and Info\" for
+        more information.)</string>
+    <string name="dialog_date_of_manuf_error"><b>The date of manufacture
+        contains invalid data.</b>        \n\nThe last 2 bytes of the manufacturer block should be in binary
+        coded decimal format (only digits, no letters). The first byte
+        (week of manufacture) must be between 1 and 53 (e.g. 28).
+        The second byte (year of manufacture) must be between 0 and the
+        current year (e.g. 12, meaning 2012).
+        \n\nMaybe the tag is not an original Mifare Classic tag.</string>
+    <string name="dialog_save_conflict_title">File already exists</string>
+    <string name="dialog_save_conflict">This file already exists.
+        What do you want to do?
+        \n\n<b>Note: Files containing multiple dumps (created by using
+        \"append\") can not be displayed, edited or written by
+        this app.</b></string>
+    <string name="dialog_donate_title">Donate</string>
+    <string name="dialog_donate"><b>Mifare Classic Tool has been updated!</b>        \n\nIf the new features, fixes or the app in general makes you happy,
+        please consider to make the developer happy. Buy him a beer! ;)</string>
+
+    <!-- Hints -->
+    <string name="hint_hex_16_byte">HEX, 16 bytes (e.g. 0A4F&#8230;)</string>
+    <string name="hint_hex_3_byte">HEX, 3 bytes</string>
+    <string name="hint_hex_00">00</string>
+    <string name="hint_int_423">e.g. 423</string>
+<!-- 扫描 -->
+     <string name="open_module">打开模块</string>
+   <string name="close_module">关闭模块</string>
+   <string name="open_saomao">开始出光</string>
+   <string name="close_saomao">关闭出光</string>
+   <string name="set_saomao">条码设置</string>
+   <string name="continue_saomao">连续扫描</string>
+   <string name="close_continuesaomao">停止连续扫描</string>
+   <string name="uhf_shortcut_support">支持超高频手柄按键扫描</string>    
+</resources>

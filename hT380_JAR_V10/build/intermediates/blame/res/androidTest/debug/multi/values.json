@@ -1,0 +1,186 @@
+[
+    {
+        "outputFile": "E:\\WorkSpace\\MyApplication\\hT380_JAR_V10\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 57,
+                    "endOffset": 108
+                },
+                "from": {
+                    "file": "E:\\WorkSpace\\MyApplication\\hT380_JAR_V10\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 57,
+                        "endOffset": 108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 113,
+                    "endColumn": 55,
+                    "endOffset": 164
+                },
+                "from": {
+                    "file": "E:\\WorkSpace\\MyApplication\\hT380_JAR_V10\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 113,
+                        "endColumn": 55,
+                        "endOffset": 164
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 169,
+                    "endColumn": 52,
+                    "endOffset": 217
+                },
+                "from": {
+                    "file": "E:\\WorkSpace\\MyApplication\\hT380_JAR_V10\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 169,
+                        "endColumn": 52,
+                        "endOffset": 217
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 222,
+                    "endColumn": 51,
+                    "endOffset": 269
+                },
+                "from": {
+                    "file": "E:\\WorkSpace\\MyApplication\\hT380_JAR_V10\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 222,
+                        "endColumn": 51,
+                        "endOffset": 269
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 274,
+                    "endColumn": 52,
+                    "endOffset": 322
+                },
+                "from": {
+                    "file": "E:\\WorkSpace\\MyApplication\\hT380_JAR_V10\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 274,
+                        "endColumn": 52,
+                        "endOffset": 322
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 327,
+                    "endLine": 18,
+                    "endColumn": 12,
+                    "endOffset": 618
+                },
+                "from": {
+                    "file": "E:\\WorkSpace\\MyApplication\\hT380_JAR_V10\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 327,
+                        "endLine": 18,
+                        "endColumn": 12,
+                        "endOffset": 618
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 623,
+                    "endLine": 21,
+                    "endColumn": 12,
+                    "endOffset": 778
+                },
+                "from": {
+                    "file": "E:\\WorkSpace\\MyApplication\\hT380_JAR_V10\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 623,
+                        "endLine": 21,
+                        "endColumn": 12,
+                        "endOffset": 778
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 783,
+                    "endLine": 27,
+                    "endColumn": 12,
+                    "endOffset": 1052
+                },
+                "from": {
+                    "file": "E:\\WorkSpace\\MyApplication\\hT380_JAR_V10\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 783,
+                        "endLine": 27,
+                        "endColumn": 12,
+                        "endOffset": 1052
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 1057,
+                    "endLine": 36,
+                    "endColumn": 12,
+                    "endOffset": 1535
+                },
+                "from": {
+                    "file": "E:\\WorkSpace\\MyApplication\\hT380_JAR_V10\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 4,
+                        "startOffset": 1057,
+                        "endLine": 36,
+                        "endColumn": 12,
+                        "endOffset": 1535
+                    }
+                }
+            }
+        ]
+    }
+]

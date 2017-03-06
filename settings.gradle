@@ -1,0 +1,2 @@
+include ':app'
+include ':hT380_JAR_V10'

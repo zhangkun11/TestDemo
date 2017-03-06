@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="DNL97">
+        <item>电能量</item>
+        <item>9010 | 正向有功总电量</item>
+        <item>9011 | 正向有功尖电量</item>
+        <item>9012 | 正向有功峰电量</item>
+        <item>9013 | 正向有功平电量</item>
+        <item>9014 | 正向有功谷电量</item>
+        <item>9020 | 反向有功总电量</item>
+        <item>9021 | 反向有功尖电量</item>
+        <item>9022 | 反向有功蜂电量</item>
+        <item>9023 | 反向有功平电量</item>
+        <item>9024 | 反向有功谷电量</item>
+        <item>9410 | 上月正向有功总</item>
+        <item>9411 | 上月正向有功尖</item>
+        <item>9412 | 上月正向有功峰</item>
+        <item>9513 | 上月正向有功平</item>
+        <item>9810 | 上2月正向有功总</item>
+        <item>9811 | 上2月正向有功尖</item>
+        <item>9812 | 上2月正向有功峰</item>
+        <item>9813 | 上2月正向有功平</item>
+        <item>9814 | 上2月正向有功谷</item>
+        <item>9510 | 上月正向无功总</item>
+        <item>9120 | 反向无功总电能</item>
+        <item>9520 | 上月反向无总功</item>
+    </string-array>
+    <string-array name="ZDX97">
+        <item>最大需量</item>
+        <item>A010 | 正向有功总最大需量</item>
+        <item>A011 | 正向有功尖最大需量</item>
+        <item>A012 | 正向有功峰最大需量</item>
+        <item>A013 | 正向有功平最大需量</item>
+        <item>A014 | 正向有功谷最大需量</item>
+        <item>A020 | 反向有功总最大需量</item>
+        <item>A021 | 反向有功尖最大需量</item>
+        <item>A022 | 反向有功峰最大需量</item>
+        <item>A023 | 反向有功平最大需量</item>
+    </string-array>
+    <string-array name="DC97">
+        <item>读参变量</item>
+        <item>C010 | 日期及星期</item>
+        <item>C011 | 时间</item>
+        <item>C111 | 最大需量周期</item>
+    </string-array>
+    <string-array name="DNL07">
+        <item>电能量</item>
+        <item>00000000 | 组合有功总电量</item>
+        <item>00010000 | 当前正向有功总电量</item>
+        <item>00010100 | 正向有功尖电量</item>
+        <item>00010200 | 正向有功峰电量</item>
+        <item>00010300 | 正向有功平电量</item>
+        <item>00010400 | 正向有功谷电量</item>
+        <item>00020000 | 反向有功总电量</item>
+        <item>00020100 | 正向有功尖电量</item>
+        <item>00020200 | 反向有功峰电量</item>
+        <item>00020300 | 反向有功平电量</item>
+        <item>00020400 | 反向有功谷电量</item>
+        <item>00030000 | 当前组合无功1总电能</item>
+        <item>00030100 | 当前组合无功1费率1电能</item>
+        <item>00030200 | 当前组合无功1费率2电能</item>
+        <item>00030300 | 当前组合无功1费率3电能</item>
+        <item>00030400 | 当前组合无功1费率4电能</item>
+        <item>00040000 | 当前组合无功2费率1电能</item>
+        <item>00040100 | 当前组合无功2费率2电能</item>
+        <item>00040000 | 当前组合无功2费率3电能</item>
+        <item>00040000 | 当前组合无功2费率4电能</item>
+        <item>00050000 | 当前第一现象无功总电能</item>
+        <item>00050100 | 当前第一现象无功费率1电能</item>
+        <item>00050200 | 当前第一现象无功费率2电能</item>
+        <item>00050300 | 当前第一现象无功费率3电能</item>
+        <item>00010001 | 上月正向有功总</item>
+        <item>00010102 | 上2月费率1正向有功</item>
+    </string-array>
+    <string-array name="ZDX07">
+        <item>选择最大需量</item>
+        <item>01010000 | 正向有功总需量</item>
+        <item>01010100 | 费率1正向最大需量</item>
+        <item>01010200 | 费率2正向最大需量</item>
+        <item>01020300 | 费率3正向最大需量</item>
+        <item>01020400 | 费率4正向最大需量</item>
+        <item>01020000 | 反向有功总需量</item>
+        <item>01020100 | 费率1反向最大需量</item>
+        <item>01020200 | 费率2反向最大需量</item>
+        <item>01020300 | 费率3反向最大需量</item>
+        <item>01020400 | 费率4反向最大需量</item>
+        <item>01010001 | 上月正向最大需量</item>
+        <item>01010101 | 上月费率1正向最大需量</item>
+        <item>01010201 | 上月费率2正向最大需量</item>
+        <item>01010301 | 上月费率3正向最大需量</item>
+        <item>01010401 | 上月费率4正向最大需量</item>
+        <item>01020001 | 上月反向最大需量</item>
+        <item>01020101 | 上月费率1反向最大需量</item>
+        <item>01020201 | 上月费率2反向最大需量</item>
+        <item>01020301 | 上月费率3反向最大需量</item>
+        <item>01020401 | 上月费率4反向最大需量</item>
+    </string-array>
+    <string-array name="DC07">
+        <item>读参变量</item>
+        <item>04000101 | 日期及星期</item>
+        <item>04000102 | 时间</item>
+        <item>04000103 | 最大需量周期</item>
+        <item>04000104 | 滑差时间</item>
+    </string-array>
+    <string-array name="ScanDeviceType">
+        <item>S Engine</item>
+        <item>U Engine</item>
+        <item>N Engine</item>
+        <item>E Engine</item>
+    </string-array>
+    <string-array name="butrat">
+        <item>1200</item>
+        <item>2400</item>
+        <item>4800</item>
+        <item>9600</item>
+        <item>19200</item>
+        <item>38400</item>
+        <item>57600</item>
+        <item>115200</item>
+    </string-array>
+    <string-array name="event">
+        <item>NO</item>
+        <item>ODD</item>
+        <item>EVEN</item>
+    </string-array>
+    <string-array name="data_bits">
+        <item>8</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="stop_bits">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="Scan_model">
+        <item>N4313</item>
+        <item>SE955</item>
+        <item>Em3095</item>
+        <item>Em3070</item>
+    </string-array>
+    <string-array name="psam_model">
+        <item>低速卡(9600)</item>
+        <item>高速卡(384000)</item>
+    </string-array>
+    <string-array name="Fre_select">
+        <item>902.75 MHz</item>
+        <item>903.25 MHz</item>
+        <item>903.75 MHz</item>
+        <item>904.25 MHz</item>
+        <item>904.75 MHz</item>
+        <item>905.25 MHz</item>
+        <item>905.75 MHz</item>
+        <item>906.25 MHz</item>
+        <item>906.75 MHz</item>
+        <item>907.25 MHz</item>
+        <item>907.75 MHz</item>
+        <item>908.25 MHz</item>
+        <item>908.75 MHz</item>
+        <item>909.25 MHz</item>
+        <item>909.75 MHz</item>
+        <item>910.25 MHz</item>
+        <item>910.75 MHz</item>
+        <item>911.25 MHz</item>
+        <item>911.75 MHz</item>
+        <item>912.25 MHz</item>
+        <item>912.75 MHz</item>
+        <item>913.25 MHz</item>
+        <item>913.75 MHz</item>
+        <item>914.25 MHz</item>
+        <item>914.75 MHz</item>
+        <item>915.25 MHz</item>
+        <item>915.75 MHz</item>
+        <item>916.25 MHz</item>
+        <item>916.75 MHz</item>
+        <item>917.25 MHz</item>
+        <item>917.75 MHz</item>
+        <item>918.25 MHz</item>
+        <item>918.75 MHz</item>
+        <item>919.25 MHz</item>
+        <item>919.75 MHz</item>
+        <item>920.25 MHz</item>
+        <item>920.75 MHz</item>
+        <item>921.25 MHz</item>
+        <item>921.75 MHz</item>
+        <item>922.25 MHz</item>
+        <item>922.75 MHz</item>
+        <item>923.25 MHz</item>
+        <item>923.75 MHz</item>
+        <item>924.25 MHz</item>
+        <item>924.75 MHz</item>
+        <item>925.25 MHz</item>
+        <item>925.75 MHz</item>
+        <item>926.25 MHz</item>
+        <item>926.75 MHz</item>
+        <item>927.25 MHz</item>
+    </string-array>
+    <string-array name="uhf_area_setting">
+        <item>北美 区域</item>
+        <item>欧洲 区域</item>
+        <item>中国1 区域</item>
+        <item>中国2 区域</item>
+    </string-array>
+
+</resources>

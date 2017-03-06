@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/gps_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="定位信息" />
+
+    <Button
+        android:id="@+id/gps_try"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="重试"></Button>
+    <!--<com.baidu.mapapi.map.MapView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        android:clickable="true"></com.baidu.mapapi.map.MapView>-->
+    <!--   <fragment
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:id="@+id/fragment_map"
+           android:name="com.example.admin.myapplication.fragment.MapFragment"></fragment>-->
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
+</LinearLayout>
