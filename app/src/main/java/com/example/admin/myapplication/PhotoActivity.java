@@ -44,28 +44,41 @@ public class PhotoActivity extends AppCompatActivity {
     private File outPutImage;
     private int touchX=0,touchY=0;
 
-
+   /* @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction()==MotionEvent.ACTION_DOWN) {
+            touchX = (int) event.getX();
+            touchY = (int) event.getY();
+        }
+        return false;
+    }*/
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
         ButterKnife.inject(this);
-        photoGet.setOnClickListener(new View.OnClickListener() {
+        photoGet.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                v.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        touchY= (int) event.getY();
-                        touchX= (int) event.getX();
-                        return false;
-                    }
-                });
-                Log.i("info", "onTouch: "+touchX+"<------->"+touchY);
-                initPopWindow(v);
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN)
+                {
+                    touchX = (int) event.getX();
+                    touchY = (int) event.getY();
+                    Log.i("info", "onTouch: "+touchX+"<=========>"+touchY);
+                    initPopWindow(v);
+                }
+                return true;
             }
         });
+        /*photoGet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.i("info", "onClick: "+touchX+"<------->"+touchY);
+                initPopWindow();
+            }
+        });*/
         /*photoGet.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -84,13 +97,18 @@ public class PhotoActivity extends AppCompatActivity {
     private void initPopWindow(View view){
         // 获取自定义布局文件activity_popupwindow_left.xml的视图
         View popupWindow_view = LayoutInflater.from(PhotoActivity.this).inflate(R.layout.popwindow, null);
-        popupWindow = new PopupWindow(popupWindow_view, 100, 80, true);
+        popupWindow = new PopupWindow(popupWindow_view, 120, 100, true);
         popupWindow.setContentView(popupWindow_view);
         TextView delete= (TextView) popupWindow_view.findViewById(R.id.image_delete);
 
         // 这里是位置显示方式,在屏幕的左侧
         //popupWindow.showAtLocation(view, Gravity.CENTER_HORIZONTAL , 0, 0);
-        popupWindow.showAsDropDown(takePhoto,touchX,touchY);
+
+        /*if(touchY==0&&touchX==0){
+            popupWindow.showAtLocation(view, Gravity.CENTER_HORIZONTAL , 0, 0);
+        }else{*/
+        popupWindow.showAsDropDown(takePhoto,touchX-60,touchY-100);
+
 
         // 点击其他地方消失
         popupWindow_view.setOnTouchListener(new View.OnTouchListener() {
