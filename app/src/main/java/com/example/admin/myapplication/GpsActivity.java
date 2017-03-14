@@ -1,12 +1,16 @@
 package com.example.admin.myapplication;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -74,6 +78,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        checkLocation();
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         updataView(location);
         //每三秒获取一次gps定位信息
@@ -154,6 +159,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        checkLocation();
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         updataView(location);
 
@@ -173,5 +179,37 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
 
         Log.i("getinfo", "getMsg: ======="+stringBuilder);
         gpsInfo.setText(stringBuilder);
+    }
+    private void checkLocation(){
+        //Log.i("info", "checkLocation: ------>");
+        boolean isOpen=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if(isOpen==false){
+            Toast.makeText(GpsActivity.this,"未打开GPS，请开启定位服务",Toast.LENGTH_SHORT).show();
+            //Log.i("info", "checkLocation: ------>  open -------->");
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setMessage("GPS未开启，请打开GPS");
+            dialog.setPositiveButton("确定",
+                    new android.content.DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+
+                            // 转到手机设置界面，用户设置GPS
+                            Intent intent = new Intent(
+                                    Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivityForResult(intent, 0); // 设置完成后返回到原来的界面
+
+                        }
+                    });
+            dialog.setNeutralButton("取消", new android.content.DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface arg0, int arg1) {
+                    arg0.dismiss();
+                }
+            } );
+            dialog.show();
+
+        }
     }
 }
