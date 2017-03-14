@@ -1,4 +1,4 @@
-package com.example.admin.myapplication.meter;
+package com.example.admin.myapplication.scan;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -23,7 +23,7 @@ public class EditTextDialog extends Dialog {
 	}
 
 	public EditTextDialog(Context context, String noticeTv, String btn1Str,
-						  String btn2Str, ClickListener l) {
+                          String btn2Str, ClickListener l) {
 		super(context);
 		// TODO Auto-generated constructor stub
 		WindowManager wm = (WindowManager) context

@@ -58,7 +58,7 @@ public class MeterController {
 			"/sys/devices/platform/exynos4412-adc/ver");
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
-		};
+		}
 	};
 
 	public static MeterController getInstance() {
@@ -91,7 +91,7 @@ public class MeterController {
 
 		if (type == METER_485) {
 			T485 = true;
-		} else {
+		}else {
 			T485 = false;
 		}
 		this.onReadSerialPortDataListener = r;

@@ -4,11 +4,13 @@ package com.example.admin.myapplication.meter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.jb.meter.MeterController;
 import android.jb.simpleic.SimpleIcController;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,8 +42,9 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 	private TextView jiegou;
 	private Spinner sp9701, sp9702, sp9703, sp0701, sp0702, sp0703;
 	private TextView recevier_data;
-	private EditTextDialog etD;
+
 	// 变量
+    private String bdzInfo;
 	private String resultData;
 	private String bz = "", bdzString;
 	private int caobiao;
@@ -131,7 +134,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 					Toast.makeText(this, getString(R.string.reset_success), Toast.LENGTH_LONG).show();
 					
 				} else {
-					Toast.makeText(this, getString(R.string.reset_failed), Toast.LENGTH_LONG).show();
+					//Toast.makeText(this, getString(R.string.reset_failed), Toast.LENGTH_LONG).show();
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -149,7 +152,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 				if (result != null) {
 					Toast.makeText(this, bytesToHexString(result), Toast.LENGTH_LONG).show();
 				} else {
-					Toast.makeText(this, getString(R.string.reset_failed), Toast.LENGTH_LONG).show();
+					//Toast.makeText(this, getString(R.string.reset_failed), Toast.LENGTH_LONG).show();
 				}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -166,6 +169,11 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 		init();
 		initSimpleIc();
 
+        SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(MeterActivity.this);
+        bdzInfo=preferences.getString("meter_edit",null);
+        if(bdzInfo!=null){
+            bdz.setText(bdzInfo);
+        }
 
 
 		send.setOnClickListener(this);
@@ -520,6 +528,10 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.caobiao_send:
+
+		    SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(MeterActivity.this).edit();
+            editor.putString("meter_edit", String.valueOf(bdz.getText()));
+            editor.apply();
 			/**
 			 * 必须打开红外控制器
 			 */

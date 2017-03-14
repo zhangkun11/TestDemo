@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.admin.myapplication.meter.MeterActivity;
+import com.example.admin.myapplication.scan.ScanActivity;
+import com.example.admin.myapplication.simpleIc.SimpleIcActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -26,6 +28,12 @@ public class MainInActivity extends AppCompatActivity {
     Button photoTest;
     @InjectView(R.id.meter_test)
     Button meterTest;
+    @InjectView(R.id.flash_test)
+    Button flashTest;
+    @InjectView(R.id.simpleIc_test)
+    Button simpleIcTest;
+    @InjectView(R.id.scan_test)
+    Button scanTest;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +47,7 @@ public class MainInActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @OnClick({R.id.screen_test, R.id.gps_test, R.id.photo_test})
+    @OnClick({R.id.screen_test, R.id.gps_test, R.id.photo_test, R.id.flash_test, R.id.simpleIc_test,R.id.scan_test})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.screen_test:
@@ -51,6 +59,15 @@ public class MainInActivity extends AppCompatActivity {
             case R.id.photo_test:
                 goToActivity(PhotoActivity.class);
                 break;
+            case R.id.flash_test:
+                goToActivity(ElectrictorchActivity.class);
+                break;
+            case R.id.simpleIc_test:
+                goToActivity(SimpleIcActivity.class);
+                break;
+            case R.id.scan_test:
+                goToActivity(ScanActivity.class);
+                break;
         }
     }
 
@@ -61,4 +78,7 @@ public class MainInActivity extends AppCompatActivity {
         intentd.putExtra("IS485", false);
         startActivity(intentd);
     }
+
+
+
 }

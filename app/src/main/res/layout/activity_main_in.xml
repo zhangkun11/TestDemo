@@ -21,10 +21,31 @@
         android:text="@string/photo_name"
         android:layout_marginTop="10dp"/>
     <Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/meter_test"
+    android:text="@string/meter_name"
+    android:layout_marginTop="10dp"
+    />
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/meter_test"
-        android:text="@string/meter_name"
+        android:id="@+id/flash_test"
+        android:text="@string/flash_name"
+        android:layout_marginTop="10dp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/simpleIc_test"
+        android:text="ESAM测试"
+        android:layout_marginTop="10dp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scan_test"
+        android:text="条形码测试"
         android:layout_marginTop="10dp"
         />
 

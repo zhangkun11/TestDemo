@@ -5,4 +5,5 @@
     <string name="photo_name">拍照测试</string>
     <string name="meter_name">红外测试</string>
     <string name="take_photo">拍照</string>
+    <string name="flash_name">手电筒测试</string>
 </resources>

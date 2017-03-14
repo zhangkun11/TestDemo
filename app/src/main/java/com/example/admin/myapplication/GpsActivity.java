@@ -1,7 +1,6 @@
 package com.example.admin.myapplication;
 
 import android.Manifest;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -14,11 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.LocationClient;
-import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
-import com.example.admin.myapplication.fragment.BDMapFragment;
 import com.example.admin.myapplication.interfaces.CallBack;
 
 import butterknife.ButterKnife;
@@ -48,7 +46,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
         super.onCreate(savedInstanceState);
 
         //map
-        SDKInitializer.initialize(getApplicationContext());
+        //SDKInitializer.initialize(getApplicationContext());
 
 
         setContentView(R.layout.activity_gps);
@@ -56,8 +54,8 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
         ButterKnife.inject(this);
 
 
-        Fragment mapFragment= new BDMapFragment();
-        getFragmentManager().beginTransaction().replace(R.id.fragment,mapFragment).commit();
+        /*Fragment mapFragment= new BDMapFragment();
+        getFragmentManager().beginTransaction().replace(R.id.fragment,mapFragment).commit();*/
 
 
         /**
@@ -103,6 +101,8 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
+                gpsInfo.setText("正在查询GPS信息");
+                Toast.makeText(GpsActivity.this,"正在查询GPS信息",Toast.LENGTH_LONG).show();
                 updataView(locationManager.getLastKnownLocation(provider));
             }
 
@@ -126,7 +126,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
             Log.i("info", "updataView: "+currentPosition);
             gpsInfo.setText(currentPosition);
         } else {
-            gpsInfo.setText("没有GPS");
+            gpsInfo.setText("暂时无法获取GPS信息，请重试");
         }
     }
 
@@ -158,7 +158,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
         updataView(location);
 
         //回调函数测试
-        new BDMapFragment().sendMsg(GpsActivity.this);
+        //new BDMapFragment().sendMsg(GpsActivity.this);
     }
 
 
