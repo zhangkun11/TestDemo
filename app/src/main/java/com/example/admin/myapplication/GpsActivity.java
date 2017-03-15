@@ -43,6 +43,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
     private boolean isFirstLocate = true;
     //android 原生GPS API ,LocationManager调用
     LocationManager locationManager;
+    private boolean isGpsEnable=false;
 
 
     @Override
@@ -76,7 +77,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
+            Toast.makeText(GpsActivity.this,"定位权限未获取，请在权限管理中打开定位授权",Toast.LENGTH_LONG).show();
         }
         checkLocation();
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -104,9 +105,10 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
                     //                                          int[] grantResults)
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
-                    return;
+                    Toast.makeText(GpsActivity.this,"定位权限未获取，请在权限管理中打开定位授权",Toast.LENGTH_LONG).show();
                 }
-                gpsInfo.setText("正在查询GPS信息");
+                isGpsEnable=true;
+                gpsInfo.setText("正在查询GPS信息,请等待...");
                 Toast.makeText(GpsActivity.this,"正在查询GPS信息",Toast.LENGTH_LONG).show();
                 updataView(locationManager.getLastKnownLocation(provider));
             }
@@ -131,7 +133,13 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
             Log.i("info", "updataView: "+currentPosition);
             gpsInfo.setText(currentPosition);
         } else {
-            gpsInfo.setText("暂时无法获取GPS信息，请重试");
+            if(isGpsEnable==false){
+                gpsInfo.setText("暂时无法获取GPS信息，请重试");
+            }else {
+                gpsInfo.setText("正在查询GPS信息,请等待...");
+                Toast.makeText(GpsActivity.this,"查询GPS信息中...",Toast.LENGTH_LONG).show();
+            }
+
         }
     }
 
@@ -157,7 +165,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
+            Toast.makeText(GpsActivity.this,"定位权限未获取，请在权限管理中打开定位授权",Toast.LENGTH_LONG).show();
         }
         checkLocation();
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -184,6 +192,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
         //Log.i("info", "checkLocation: ------>");
         boolean isOpen=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if(isOpen==false){
+            isGpsEnable=false;
             Toast.makeText(GpsActivity.this,"未打开GPS，请开启定位服务",Toast.LENGTH_SHORT).show();
             //Log.i("info", "checkLocation: ------>  open -------->");
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
