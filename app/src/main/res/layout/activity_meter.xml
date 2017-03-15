@@ -114,7 +114,7 @@
         android:layout_height="wrap_content"
 
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/caobiao_send"
@@ -124,22 +124,13 @@
             android:text="@string/confirm"
             android:textSize="16sp" />
 
-       <!-- <CheckBox
-            android:id="@+id/chaobiao_continue_cb"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/next_test"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginLeft="5dp"
-            android:text="@string/chaobiao_continue_cb"
-            android:textColor="@android:color/black" />
-        
-        <TextView
-            android:id="@+id/recevier_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />-->
+            android:text="下一项：ESAM测试" />
+
     </LinearLayout>
 
     <LinearLayout

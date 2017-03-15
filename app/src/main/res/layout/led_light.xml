@@ -28,5 +28,12 @@
             android:textOff="@string/led_close"
             android:textOn="@string/led_open" />
     </FrameLayout>
+    <Button
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/next_test"
+        android:text="下一项：  红外测试"/>
+
 
 </LinearLayout>

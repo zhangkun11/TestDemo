@@ -2,6 +2,7 @@ package com.example.admin.myapplication;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,11 +11,14 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,19 +35,23 @@ import butterknife.OnClick;
  * Created by admin on 2017-02-22.
  */
 
-public class GpsActivity extends AppCompatActivity implements CallBack{
+public class GpsActivity extends AppCompatActivity implements CallBack {
     @InjectView(R.id.gps_info)
     TextView gpsInfo;
     public LocationClient locationClient;
     @InjectView(R.id.gps_try)
     Button gpsTry;
+    @InjectView(R.id.next_test)
+    Button nextTest;
 
     private StringBuilder stringBuilder;
     private BaiduMap baiduMap;
     private boolean isFirstLocate = true;
     //android 原生GPS API ,LocationManager调用
     LocationManager locationManager;
-    private boolean isGpsEnable=false;
+    private boolean isGpsEnable = false, isShowProgress = false;
+
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -59,6 +67,16 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
         ButterKnife.inject(this);
 
 
+        nextTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(GpsActivity.this,PhotoActivity.class);
+                startActivity(intent);
+                MyApplication.getSession().set("gps",true);
+                finish();
+            }
+        });
         /*Fragment mapFragment= new BDMapFragment();
         getFragmentManager().beginTransaction().replace(R.id.fragment,mapFragment).commit();*/
 
@@ -77,13 +95,14 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            Toast.makeText(GpsActivity.this,"定位权限未获取，请在权限管理中打开定位授权",Toast.LENGTH_LONG).show();
+            Toast.makeText(GpsActivity.this, "定位权限未获取，请在权限管理中打开定位授权", Toast.LENGTH_LONG).show();
         }
         checkLocation();
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         updataView(location);
         //每三秒获取一次gps定位信息
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 8, new LocationListener() {
+
             @Override
             public void onLocationChanged(Location location) {
                 updataView(location);
@@ -105,11 +124,14 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
                     //                                          int[] grantResults)
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
-                    Toast.makeText(GpsActivity.this,"定位权限未获取，请在权限管理中打开定位授权",Toast.LENGTH_LONG).show();
+                    Toast.makeText(GpsActivity.this, "定位权限未获取，请在权限管理中打开定位授权", Toast.LENGTH_LONG).show();
                 }
-                isGpsEnable=true;
+                checkLocation();
+                isGpsEnable = true;
+
                 gpsInfo.setText("正在查询GPS信息,请等待...");
-                Toast.makeText(GpsActivity.this,"正在查询GPS信息",Toast.LENGTH_LONG).show();
+                //showProgressCheck();
+                Toast.makeText(GpsActivity.this, "正在查询GPS信息", Toast.LENGTH_LONG).show();
                 updataView(locationManager.getLastKnownLocation(provider));
             }
 
@@ -130,14 +152,25 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
             currentPosition.append("速度：").append(location.getSpeed()).append("\n");
             currentPosition.append("方向：").append(location.getBearing()).append("\n");
             currentPosition.append("时间：").append(location.getTime()).append("\n");
-            Log.i("info", "updataView: "+currentPosition);
+            Log.i("info", "updataView: " + currentPosition);
             gpsInfo.setText(currentPosition);
+
+            isShowProgress = false;
+            handler.sendEmptyMessage(0);
+
+
         } else {
-            if(isGpsEnable==false){
-                gpsInfo.setText("暂时无法获取GPS信息，请重试");
-            }else {
+            if (isGpsEnable == false) {
+
+                gpsInfo.setText("暂时无法获取GPS信息，自动重试中...");
+                Toast.makeText(GpsActivity.this, "程序正在自动重试查找，请等待...", Toast.LENGTH_LONG).show();
+
+            } else {
                 gpsInfo.setText("正在查询GPS信息,请等待...");
-                Toast.makeText(GpsActivity.this,"查询GPS信息中...",Toast.LENGTH_LONG).show();
+                Toast.makeText(GpsActivity.this, "查询GPS信息中...", Toast.LENGTH_LONG).show();
+
+                isShowProgress = true;
+                handler.sendEmptyMessage(0);
             }
 
         }
@@ -165,7 +198,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            Toast.makeText(GpsActivity.this,"定位权限未获取，请在权限管理中打开定位授权",Toast.LENGTH_LONG).show();
+            Toast.makeText(GpsActivity.this, "定位权限未获取，请在权限管理中打开定位授权", Toast.LENGTH_LONG).show();
         }
         checkLocation();
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -179,26 +212,28 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MyApplication.getSession().set("gps",true);
 
     }
 
     @Override
     public void getMsg(String stringBuilder) {
 
-        Log.i("getinfo", "getMsg: ======="+stringBuilder);
+        Log.i("getinfo", "getMsg: =======" + stringBuilder);
         gpsInfo.setText(stringBuilder);
     }
-    private void checkLocation(){
+
+    private void checkLocation() {
         //Log.i("info", "checkLocation: ------>");
-        boolean isOpen=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if(isOpen==false){
-            isGpsEnable=false;
-            Toast.makeText(GpsActivity.this,"未打开GPS，请开启定位服务",Toast.LENGTH_SHORT).show();
+        boolean isOpen = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (isOpen == false) {
+            isGpsEnable = false;
+            Toast.makeText(GpsActivity.this, "未打开GPS，请开启定位服务", Toast.LENGTH_SHORT).show();
             //Log.i("info", "checkLocation: ------>  open -------->");
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setMessage("GPS未开启，请打开GPS");
             dialog.setPositiveButton("确定",
-                    new android.content.DialogInterface.OnClickListener() {
+                    new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
@@ -210,15 +245,46 @@ public class GpsActivity extends AppCompatActivity implements CallBack{
 
                         }
                     });
-            dialog.setNeutralButton("取消", new android.content.DialogInterface.OnClickListener() {
+            dialog.setNeutralButton("取消", new DialogInterface.OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
                     arg0.dismiss();
                 }
-            } );
+            });
             dialog.show();
 
         }
     }
+
+    private void showProgressCheck() {
+        if (isGpsEnable) {
+            if (isShowProgress) {
+                progressDialog = new ProgressDialog(GpsActivity.this);
+                progressDialog.setTitle("GPS查询");
+                progressDialog.setMessage("查询中，请等待...");
+                progressDialog.setCancelable(true);
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setIndeterminate(false);
+                progressDialog.show();
+            } else {
+                if (progressDialog != null) {
+                    progressDialog.setMessage("已完成");
+                    progressDialog.dismiss();
+                    isGpsEnable = false;
+                }
+            }
+        }
+
+    }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            showProgressCheck();
+        }
+    };
+
+
 }

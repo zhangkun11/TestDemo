@@ -60,6 +60,8 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".ElectrictorchActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".buttontest.ButtonTestActivity"
+            android:screenOrientation="portrait"></activity>
         <!-- <provider
             android:authorities="com.example.admin.myapplication.photo"
             android:name="android.support.v4.content.FileProvider"

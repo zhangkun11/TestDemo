@@ -10,7 +10,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:layout_marginTop="10dp"
+            android:layout_margin="5dp"
             android:id="@+id/button0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +38,14 @@
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:text="@string/simple_test4" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:id="@+id/next_test"
+            android:text="下一项：条码扫描测试"/>
     </LinearLayout>
 
     <TextView

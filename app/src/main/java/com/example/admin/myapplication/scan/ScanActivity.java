@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
+import com.example.admin.myapplication.MyApplication;
 import com.example.admin.myapplication.R;
 
 import java.io.UnsupportedEncodingException;
@@ -335,6 +336,7 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		MyApplication.getSession().set("scan",true);
 		if (scanService != null) {
 			if (null != scanManager) {
 				System.out.println("ScanActivity Barcode_Stop5");

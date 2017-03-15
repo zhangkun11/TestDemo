@@ -5,8 +5,15 @@
 <Button
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:id="@+id/take_photo"
     android:text="@string/take_photo"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:id="@+id/next_test"
+        android:text="下一项：闪光灯测试"/>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

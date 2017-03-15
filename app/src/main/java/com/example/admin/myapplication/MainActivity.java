@@ -45,7 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyApplication.getSession().set("main",true);
+    }
 
     Runnable runnable = new Runnable() {
         @Override

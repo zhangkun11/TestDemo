@@ -1,52 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/screen_test"
-        android:text="@string/screentest_name"
-        android:layout_marginTop="10dp"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/gps_test"
-        android:text="@string/gpstest_name"
-        android:layout_marginTop="10dp"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/photo_test"
-        android:text="@string/photo_name"
-        android:layout_marginTop="10dp"/>
-    <Button
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/meter_test"
-    android:text="@string/meter_name"
-    android:layout_marginTop="10dp"
-    />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/flash_test"
-        android:text="@string/flash_name"
-        android:layout_marginTop="10dp"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/simpleIc_test"
-        android:text="ESAM测试"
-        android:layout_marginTop="10dp"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scan_test"
-        android:text="条形码测试"
-        android:layout_marginTop="10dp"
-        />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/screen_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/screentest_name" />
+
+            <Button
+                android:id="@+id/button_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="按键测试" />
+
+            <Button
+                android:id="@+id/gps_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/gpstest_name" />
+
+            <Button
+                android:id="@+id/photo_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/photo_name" />
+
+            <Button
+                android:id="@+id/flash_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/flash_name" />
+
+            <Button
+                android:id="@+id/meter_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/meter_name" />
+
+            <Button
+                android:id="@+id/simpleIc_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="ESAM测试" />
+
+            <Button
+                android:id="@+id/scan_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="条形码测试" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

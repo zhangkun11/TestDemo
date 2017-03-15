@@ -3,6 +3,8 @@ package com.example.admin.myapplication;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.admin.myapplication.model.Session;
+
 /**
  * Created by admin on 2017-02-28.
  */
@@ -10,6 +12,12 @@ import android.content.Context;
 public class MyApplication extends Application {
     private static MyApplication getInstance;
     private static Context context;
+
+    public static Session getSession() {
+        return session;
+    }
+
+    private static Session session;
 
 
     public static Context getMyApplicationContext(){
@@ -27,6 +35,7 @@ public class MyApplication extends Application {
         super.onCreate();
         getInstance=this;
         context=getApplicationContext();
+        session=new Session();
         //map
         //SDKInitializer.initialize(context);
     }
