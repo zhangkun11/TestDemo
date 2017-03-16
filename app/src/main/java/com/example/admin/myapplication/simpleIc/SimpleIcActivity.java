@@ -225,6 +225,9 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
                         byte[] result = pSamCon.Simpleic_Write(createRandomCom2);
                         if (tv_show != null) {
                             tv_show.setText(bytesToHexString(result));
+                            if(bytesToHexString(result)==null){
+                                tv_show.setText("未读取到数据，请复位后重试");
+                            }
                             System.out
                                     .println("result:" + bytesToHexString(result));
                         } else {
