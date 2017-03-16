@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="按键测试" />
+                android:text="2 按键测试" />
 
             <Button
                 android:id="@+id/gps_test"
@@ -60,14 +60,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="ESAM测试" />
+                android:text="7 ESAM测试" />
 
             <Button
                 android:id="@+id/scan_test"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="条形码测试" />
+                android:text="8 条形码测试" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

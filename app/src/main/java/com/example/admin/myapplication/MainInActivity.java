@@ -136,35 +136,35 @@ public class MainInActivity extends AppCompatActivity {
         //boolean check=MyApplication.getSession().getBoolean("main");
         if (checkMain == true) {
             screenTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            screenTest.setText("屏幕测试（已测试）");
+            screenTest.setText("1 屏幕测试（已测试）");
         }
         if (checkGps == true) {
             gpsTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            gpsTest.setText("GPS测试（已测试）");
+            gpsTest.setText("3 GPS测试（已测试）");
         }
         if (checkPhoto == true) {
             photoTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            photoTest.setText("拍照测试（已测试）");
+            photoTest.setText("4 拍照测试（已测试）");
         }
         if (checkElec == true) {
             flashTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            flashTest.setText("闪光灯测试（已测试）");
+            flashTest.setText("5 手电筒测试（已测试）");
         }
         if (checkEsam == true) {
             simpleIcTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            simpleIcTest.setText("ESAM测试（已测试）");
+            simpleIcTest.setText("7 ESAM测试（已测试）");
         }
         if (checkMeter == true) {
             meterTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            meterTest.setText("红外测试（已测试）");
+            meterTest.setText("6 红外测试（已测试）");
         }
         if (checkScan == true) {
             scanTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            scanTest.setText("条码扫描测试（已测试）");
+            scanTest.setText("8 条码扫描测试（已测试）");
         }
         if (checkBut == true) {
             buttonTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            buttonTest.setText("按键测试（已测试）");
+            buttonTest.setText("2 按键测试（已测试）");
         }
 
     }

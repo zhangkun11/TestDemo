@@ -137,7 +137,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
         if (pSamCon != null) {
             try {
                 if (pSamCon.Simpleic_Reset()) {
-                    Toast.makeText(this, getString(R.string.reset_success), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, getString(R.string.reset_success), Toast.LENGTH_LONG).show();
 
                 } else {
                     //Toast.makeText(this, getString(R.string.reset_failed), Toast.LENGTH_LONG).show();
@@ -155,7 +155,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
                 byte[] result = pSamCon.Simpleic_Write(new byte[]{(byte) 0x00,
                         (byte) 0x84, (byte) 0x00, (byte) 0x00, (byte) 0x04});
                 if (result != null) {
-                    Toast.makeText(this, bytesToHexString(result), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, bytesToHexString(result), Toast.LENGTH_LONG).show();
                 } else {
                     //Toast.makeText(this, getString(R.string.reset_failed), Toast.LENGTH_LONG).show();
                 }
