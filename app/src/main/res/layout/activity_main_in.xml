@@ -78,6 +78,27 @@
                 android:layout_margin="5dp"
 
                 android:text="8 条形码测试" />
+            <Button
+                android:id="@+id/rs_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+
+                android:text="9 串口/PS2测试" />
+            <Button
+                android:id="@+id/rs4_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+
+                android:text="10 RS485测试" />
+            <Button
+                android:id="@+id/nfc_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+
+                android:text="11 NFC测试" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

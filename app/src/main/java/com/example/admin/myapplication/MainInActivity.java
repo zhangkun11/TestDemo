@@ -1,9 +1,13 @@
 package com.example.admin.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,6 +16,8 @@ import android.widget.Button;
 
 import com.example.admin.myapplication.buttontest.ButtonTestActivity;
 import com.example.admin.myapplication.meter.MeterActivity;
+import com.example.admin.myapplication.nfc.NFCActivity;
+import com.example.admin.myapplication.rs232.RS232Activity;
 import com.example.admin.myapplication.scan.ScanActivity;
 import com.example.admin.myapplication.simpleIc.SimpleIcActivity;
 
@@ -40,6 +46,18 @@ public class MainInActivity extends AppCompatActivity {
     Button scanTest;
     @InjectView(R.id.button_test)
     Button buttonTest;
+    @InjectView(R.id.rs_test)
+    Button rsTest;
+    @InjectView(R.id.nfc_test)
+    Button nfcTest;
+    @InjectView(R.id.rs4_test)
+    Button rs4Test;
+
+    private boolean mDTMFToneEnabled;// 按键操作音
+    private Object mToneGeneratorLock = new Object();// 监视器对象锁
+    private ToneGenerator mToneGenerator;
+    private static final int TONE_RELATIVE_VOLUME = 80;
+    private static final int TONE_LENGTH_MS = 150;// 延迟时间
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +66,22 @@ public class MainInActivity extends AppCompatActivity {
         ButterKnife.inject(this);
         Log.i("info", "onCreate: ");
         //setButton();
+        mDTMFToneEnabled = Settings.System.getInt(this.getContentResolver(),
+                Settings.System.DTMF_TONE_WHEN_DIALING, 1) == 1;
+        synchronized (mToneGeneratorLock) {
+            if (mToneGenerator == null) {
+                try {
+                    mToneGenerator = new ToneGenerator(
+                            AudioManager.STREAM_DTMF, TONE_RELATIVE_VOLUME);
+                } catch (RuntimeException e) {
+                    Log.d("jiebao",
+                            "Exception caught while creating local tone generator: "
+                                    + e);
+                    mToneGenerator = null;
+                }
+
+            }
+        }
 
     }
 
@@ -83,7 +117,8 @@ public class MainInActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @OnClick({R.id.screen_test, R.id.gps_test, R.id.photo_test, R.id.flash_test, R.id.simpleIc_test, R.id.scan_test,R.id.button_test})
+    @OnClick({R.id.screen_test, R.id.gps_test, R.id.photo_test, R.id.flash_test, R.id.simpleIc_test, R.id.scan_test, R.id.button_test,
+            R.id.rs_test, R.id.nfc_test,R.id.rs4_test})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.screen_test:
@@ -106,6 +141,18 @@ public class MainInActivity extends AppCompatActivity {
                 break;
             case R.id.button_test:
                 goToActivity(ButtonTestActivity.class);
+                break;
+            case R.id.rs_test:
+                MyApplication.getSession().set("rs_4",false);
+                goToActivity(RS232Activity.class);
+                break;
+            case R.id.rs4_test:
+                MyApplication.getSession().set("rs_4",true);
+                goToActivity(RS232Activity.class);
+                break;
+            case R.id.nfc_test:
+                playTone(ToneGenerator.TONE_DTMF_1);
+                goToActivity(NFCActivity.class);
                 break;
         }
     }
@@ -132,6 +179,26 @@ public class MainInActivity extends AppCompatActivity {
             setButton();
         }
     };
+    private void playTone(int tone) {
+        if (!mDTMFToneEnabled) {
+            return;
+        }
+        AudioManager audioManager = (AudioManager) MainInActivity.this
+                .getSystemService(Context.AUDIO_SERVICE);
+        int ringerMode = audioManager.getRingerMode();
+        if ((ringerMode == AudioManager.RINGER_MODE_SILENT)
+                || (ringerMode == AudioManager.RINGER_MODE_VIBRATE)) {
+            return;
+        }
+
+        synchronized (mToneGeneratorLock) {
+            if (mToneGenerator == null) {
+                Log.d("jiebao", "playTone: mToneGenerator == null, tone: " + tone);
+                return;
+            }
+            mToneGenerator.startTone(tone, TONE_LENGTH_MS);
+        }
+    }
 
     @OnClick(R.id.meter_test)
     public void onClick() {
@@ -152,67 +219,67 @@ public class MainInActivity extends AppCompatActivity {
         boolean checkScan = MyApplication.getSession().getBoolean("scan");
         //boolean check=MyApplication.getSession().getBoolean("main");
         //Log.i("session", "setButton: =======    "+MyApplication.getSession().getObj("main"));
-        if (checkMain == true&&MyApplication.getSession().getObj("main")!=null) {
+        if (checkMain == true && MyApplication.getSession().getObj("main") != null) {
             screenTest.setTextColor(getResources().getColor(R.color.colorGreen));
             screenTest.setText("1 屏幕测试（成功）");
         }
-        if (checkMain == false&&MyApplication.getSession().getObj("main")!=null) {
+        if (checkMain == false && MyApplication.getSession().getObj("main") != null) {
             screenTest.setTextColor(getResources().getColor(R.color.colorRed));
             screenTest.setText("1 屏幕测试（未成功）");
         }
-        if (checkGps == true&&MyApplication.getSession().getObj("gps")!=null) {
+        if (checkGps == true && MyApplication.getSession().getObj("gps") != null) {
             gpsTest.setTextColor(getResources().getColor(R.color.colorGreen));
             gpsTest.setText("5 GPS测试（成功）");
         }
-        if (checkGps == false&&MyApplication.getSession().getObj("gps")!=null) {
+        if (checkGps == false && MyApplication.getSession().getObj("gps") != null) {
             gpsTest.setTextColor(getResources().getColor(R.color.colorRed));
             gpsTest.setText("5 GPS测试（未成功）");
         }
-        if (checkPhoto == true&&MyApplication.getSession().getObj("photo")!=null) {
+        if (checkPhoto == true && MyApplication.getSession().getObj("photo") != null) {
             photoTest.setTextColor(getResources().getColor(R.color.colorGreen));
             photoTest.setText("3 拍照测试（成功）");
         }
-        if (checkPhoto == false&&MyApplication.getSession().getObj("photo")!=null) {
+        if (checkPhoto == false && MyApplication.getSession().getObj("photo") != null) {
             photoTest.setTextColor(getResources().getColor(R.color.colorRed));
             photoTest.setText("3 拍照测试（未成功）");
         }
-        if (checkElec == true&&MyApplication.getSession().getObj("elec")!=null) {
+        if (checkElec == true && MyApplication.getSession().getObj("elec") != null) {
             flashTest.setTextColor(getResources().getColor(R.color.colorGreen));
             flashTest.setText("4 手电筒测试（成功）");
         }
-        if (checkElec == false&&MyApplication.getSession().getObj("elec")!=null) {
+        if (checkElec == false && MyApplication.getSession().getObj("elec") != null) {
             flashTest.setTextColor(getResources().getColor(R.color.colorRed));
             flashTest.setText("4 手电筒测试（未成功）");
         }
-        if (checkEsam == true&&MyApplication.getSession().getObj("esam")!=null) {
+        if (checkEsam == true && MyApplication.getSession().getObj("esam") != null) {
             simpleIcTest.setTextColor(getResources().getColor(R.color.colorGreen));
             simpleIcTest.setText("7 ESAM测试（成功）");
         }
-        if (checkEsam == false&&MyApplication.getSession().getObj("esam")!=null) {
+        if (checkEsam == false && MyApplication.getSession().getObj("esam") != null) {
             simpleIcTest.setTextColor(getResources().getColor(R.color.colorRed));
             simpleIcTest.setText("7 ESAM测试（未成功）");
         }
-        if (checkMeter == true&&MyApplication.getSession().getObj("meter")!=null) {
+        if (checkMeter == true && MyApplication.getSession().getObj("meter") != null) {
             meterTest.setTextColor(getResources().getColor(R.color.colorGreen));
             meterTest.setText("6 红外测试（成功）");
         }
-        if (checkMeter == false&&MyApplication.getSession().getObj("meter")!=null) {
+        if (checkMeter == false && MyApplication.getSession().getObj("meter") != null) {
             meterTest.setTextColor(getResources().getColor(R.color.colorRed));
             meterTest.setText("6 红外测试（未成功）");
         }
-        if (checkScan == true&&MyApplication.getSession().getObj("scan")!=null) {
+        if (checkScan == true && MyApplication.getSession().getObj("scan") != null) {
             scanTest.setTextColor(getResources().getColor(R.color.colorGreen));
             scanTest.setText("8 条码扫描测试（成功）");
         }
-        if (checkScan == false&&MyApplication.getSession().getObj("scan")!=null) {
+        if (checkScan == false && MyApplication.getSession().getObj("scan") != null) {
             scanTest.setTextColor(getResources().getColor(R.color.colorRed));
             scanTest.setText("8 条码扫描测试（未成功）");
         }
-        if (checkBut == true&&MyApplication.getSession().getObj("button")!=null) {
+        if (checkBut == true && MyApplication.getSession().getObj("button") != null) {
             buttonTest.setTextColor(getResources().getColor(R.color.colorGreen));
             buttonTest.setText("2 按键测试（成功）");
         }
-        if (checkBut == false&&MyApplication.getSession().getObj("button")!=null) {
+        if (checkBut == false && MyApplication.getSession().getObj("button") != null) {
             buttonTest.setTextColor(getResources().getColor(R.color.colorRed));
             buttonTest.setText("2 按键测试（未成功）");
         }

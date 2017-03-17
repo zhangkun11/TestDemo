@@ -62,6 +62,8 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".buttontest.ButtonTestActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".rs232.RS232Activity"
+            android:screenOrientation="portrait"></activity>
         <!-- <provider
             android:authorities="com.example.admin.myapplication.photo"
             android:name="android.support.v4.content.FileProvider"
@@ -89,6 +91,25 @@
                 <action android:name="ScanServiceDestroy" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".nfc.NFCActivity"
+            android:label="@string/app_nameNoV"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+                <action android:name="android.nfc.action.TAG_LOST" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
+        </activity>
     </application>
 
 </manifest>
