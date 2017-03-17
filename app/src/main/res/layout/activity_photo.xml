@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:id="@+id/next_test"
-        android:text="下一项：闪光灯测试"/>
+        android:text="完成检测"/>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

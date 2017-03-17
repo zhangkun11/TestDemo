@@ -129,7 +129,7 @@
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="下一项：ESAM测试" />
+            android:text="完成检测" />
 
     </LinearLayout>
 

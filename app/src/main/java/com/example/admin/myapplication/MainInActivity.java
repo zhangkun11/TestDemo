@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -45,20 +46,36 @@ public class MainInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_in);
         ButterKnife.inject(this);
+        Log.i("info", "onCreate: ");
+        //setButton();
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        Log.i("info", "onStart: ");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i("info", "onResume: ");
 
         new Thread(runnable).start();
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("info", "onStop: ");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("info", "onDestroy: ");
     }
 
     private void goToActivity(Class activity) {
@@ -98,7 +115,7 @@ public class MainInActivity extends AppCompatActivity {
         public void run() {
             while (true) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -134,37 +151,70 @@ public class MainInActivity extends AppCompatActivity {
         boolean checkEsam = MyApplication.getSession().getBoolean("esam");
         boolean checkScan = MyApplication.getSession().getBoolean("scan");
         //boolean check=MyApplication.getSession().getBoolean("main");
-        if (checkMain == true) {
+        //Log.i("session", "setButton: =======    "+MyApplication.getSession().getObj("main"));
+        if (checkMain == true&&MyApplication.getSession().getObj("main")!=null) {
             screenTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            screenTest.setText("1 屏幕测试（已测试）");
+            screenTest.setText("1 屏幕测试（成功）");
         }
-        if (checkGps == true) {
+        if (checkMain == false&&MyApplication.getSession().getObj("main")!=null) {
+            screenTest.setTextColor(getResources().getColor(R.color.colorRed));
+            screenTest.setText("1 屏幕测试（未成功）");
+        }
+        if (checkGps == true&&MyApplication.getSession().getObj("gps")!=null) {
             gpsTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            gpsTest.setText("3 GPS测试（已测试）");
+            gpsTest.setText("5 GPS测试（成功）");
         }
-        if (checkPhoto == true) {
+        if (checkGps == false&&MyApplication.getSession().getObj("gps")!=null) {
+            gpsTest.setTextColor(getResources().getColor(R.color.colorRed));
+            gpsTest.setText("5 GPS测试（未成功）");
+        }
+        if (checkPhoto == true&&MyApplication.getSession().getObj("photo")!=null) {
             photoTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            photoTest.setText("4 拍照测试（已测试）");
+            photoTest.setText("3 拍照测试（成功）");
         }
-        if (checkElec == true) {
+        if (checkPhoto == false&&MyApplication.getSession().getObj("photo")!=null) {
+            photoTest.setTextColor(getResources().getColor(R.color.colorRed));
+            photoTest.setText("3 拍照测试（未成功）");
+        }
+        if (checkElec == true&&MyApplication.getSession().getObj("elec")!=null) {
             flashTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            flashTest.setText("5 手电筒测试（已测试）");
+            flashTest.setText("4 手电筒测试（成功）");
         }
-        if (checkEsam == true) {
+        if (checkElec == false&&MyApplication.getSession().getObj("elec")!=null) {
+            flashTest.setTextColor(getResources().getColor(R.color.colorRed));
+            flashTest.setText("4 手电筒测试（未成功）");
+        }
+        if (checkEsam == true&&MyApplication.getSession().getObj("esam")!=null) {
             simpleIcTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            simpleIcTest.setText("7 ESAM测试（已测试）");
+            simpleIcTest.setText("7 ESAM测试（成功）");
         }
-        if (checkMeter == true) {
+        if (checkEsam == false&&MyApplication.getSession().getObj("esam")!=null) {
+            simpleIcTest.setTextColor(getResources().getColor(R.color.colorRed));
+            simpleIcTest.setText("7 ESAM测试（未成功）");
+        }
+        if (checkMeter == true&&MyApplication.getSession().getObj("meter")!=null) {
             meterTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            meterTest.setText("6 红外测试（已测试）");
+            meterTest.setText("6 红外测试（成功）");
         }
-        if (checkScan == true) {
+        if (checkMeter == false&&MyApplication.getSession().getObj("meter")!=null) {
+            meterTest.setTextColor(getResources().getColor(R.color.colorRed));
+            meterTest.setText("6 红外测试（未成功）");
+        }
+        if (checkScan == true&&MyApplication.getSession().getObj("scan")!=null) {
             scanTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            scanTest.setText("8 条码扫描测试（已测试）");
+            scanTest.setText("8 条码扫描测试（成功）");
         }
-        if (checkBut == true) {
+        if (checkScan == false&&MyApplication.getSession().getObj("scan")!=null) {
+            scanTest.setTextColor(getResources().getColor(R.color.colorRed));
+            scanTest.setText("8 条码扫描测试（未成功）");
+        }
+        if (checkBut == true&&MyApplication.getSession().getObj("button")!=null) {
             buttonTest.setTextColor(getResources().getColor(R.color.colorGreen));
-            buttonTest.setText("2 按键测试（已测试）");
+            buttonTest.setText("2 按键测试（成功）");
+        }
+        if (checkBut == false&&MyApplication.getSession().getObj("button")!=null) {
+            buttonTest.setTextColor(getResources().getColor(R.color.colorRed));
+            buttonTest.setText("2 按键测试（未成功）");
         }
 
     }

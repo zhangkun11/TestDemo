@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="screentest_name">1 屏幕测试</string>
-    <string name="gpstest_name">3 GPS测试</string>
-    <string name="photo_name">4 拍照测试</string>
+    <string name="gpstest_name">5 GPS测试</string>
+    <string name="photo_name">3 拍照测试</string>
     <string name="meter_name">6 红外测试</string>
     <string name="take_photo">拍照</string>
-    <string name="flash_name">5 手电筒测试</string>
+    <string name="flash_name">4 手电筒测试</string>
 </resources>

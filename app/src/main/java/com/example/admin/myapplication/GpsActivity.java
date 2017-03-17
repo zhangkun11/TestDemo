@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.baidu.location.LocationClient;
 import com.baidu.mapapi.map.BaiduMap;
 import com.example.admin.myapplication.interfaces.CallBack;
+import com.example.admin.myapplication.meter.MeterActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -65,15 +66,15 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
         setContentView(R.layout.activity_gps);
 
         ButterKnife.inject(this);
+        Toast.makeText(GpsActivity.this,"GPS测试",Toast.LENGTH_SHORT).show();
 
 
         nextTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(GpsActivity.this,PhotoActivity.class);
+                Intent intent=new Intent(GpsActivity.this,MeterActivity.class);
                 startActivity(intent);
-                MyApplication.getSession().set("gps",true);
                 finish();
             }
         });
@@ -158,6 +159,8 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
             isShowProgress = false;
             handler.sendEmptyMessage(0);
 
+            showDialog();
+
 
         } else {
             if (isGpsEnable == false) {
@@ -212,7 +215,10 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MyApplication.getSession().set("gps",true);
+        //MyApplication.getSession().set("gps",true);
+        if(MyApplication.getSession().getBoolean("gps")!=true){
+            MyApplication.getSession().set("gps",false);
+        }
 
     }
 
@@ -285,6 +291,34 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
             showProgressCheck();
         }
     };
+
+    private void showDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("检测成功，是否确认完成该项检测并跳转下一项测试");
+        dialog.setPositiveButton("是",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        MyApplication.getSession().set("gps",true);
+                        Intent intent=new Intent(GpsActivity.this, MeterActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+        dialog.setNeutralButton("否", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                MyApplication.getSession().set("gps",true);
+                arg0.dismiss();
+
+            }
+        });
+        dialog.show();
+    }
 
 
 }

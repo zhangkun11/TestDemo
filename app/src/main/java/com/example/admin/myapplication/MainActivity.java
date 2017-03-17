@@ -1,11 +1,18 @@
 package com.example.admin.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.admin.myapplication.buttontest.ButtonTestActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,14 +48,26 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         text= (TextView) findViewById(R.id.textTest);
+        Toast.makeText(MainActivity.this,"屏幕测试",Toast.LENGTH_SHORT).show();
         new Thread(runnable).start();
 
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction()==MotionEvent.ACTION_DOWN){
+            showDialog();
+        }
+        return super.onTouchEvent(event);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        MyApplication.getSession().set("main",true);
+        //MyApplication.getSession().set("main",true);
+        if(MyApplication.getSession().getBoolean("main")!=true){
+            MyApplication.getSession().set("main",false);
+        }
     }
 
     Runnable runnable = new Runnable() {
@@ -67,6 +86,33 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+    private void showDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("是否确认成功完成该项检测并跳转下一项测试");
+        dialog.setPositiveButton("成功",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                       MyApplication.getSession().set("main",true);
+                        Intent intent=new Intent(MainActivity.this, ButtonTestActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+        dialog.setNeutralButton("失败", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                MyApplication.getSession().set("main",false);
+                arg0.dismiss();
+                finish();
+            }
+        });
+        dialog.show();
+    }
 
 }
 

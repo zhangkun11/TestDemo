@@ -1,5 +1,7 @@
 package com.example.admin.myapplication.buttontest;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,9 +10,10 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.admin.myapplication.GpsActivity;
 import com.example.admin.myapplication.MyApplication;
+import com.example.admin.myapplication.PhotoActivity;
 import com.example.admin.myapplication.R;
 
 import butterknife.ButterKnife;
@@ -33,6 +36,7 @@ public class ButtonTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_button_test);
         ButterKnife.inject(this);
+        Toast.makeText(ButtonTestActivity.this,"按键测试",Toast.LENGTH_SHORT).show();
         stringBuilder=new StringBuilder();
         stringBuilder.append("点击实体按键，核对按键与显示是否一致").append("\n");
 
@@ -136,15 +140,42 @@ public class ButtonTestActivity extends AppCompatActivity {
 
     @OnClick(R.id.next_test)
     public void onClick() {
-        Intent intent=new Intent(ButtonTestActivity.this, GpsActivity.class);
-        startActivity(intent);
-        MyApplication.getSession().set("button",true);
-        finish();
+        showDialog();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MyApplication.getSession().set("button",true);
+        //MyApplication.getSession().set("button",true);
+        if(MyApplication.getSession().getBoolean("button")!=true){
+            MyApplication.getSession().set("button",false);
+        }
+    }
+    private void showDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("是否确认成功完成该项检测并跳转下一项测试");
+        dialog.setPositiveButton("成功",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        MyApplication.getSession().set("button",true);
+                        Intent intent=new Intent(ButtonTestActivity.this, PhotoActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+        dialog.setNeutralButton("失败", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                MyApplication.getSession().set("button",false);
+                arg0.dismiss();
+
+            }
+        });
+        dialog.show();
     }
 }

@@ -1,5 +1,7 @@
 package com.example.admin.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -58,7 +60,10 @@ public class PhotoActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MyApplication.getSession().set("photo",true);
+        //MyApplication.getSession().set("photo",true);
+        if(MyApplication.getSession().getBoolean("photo")!=true){
+            MyApplication.getSession().set("photo",false);
+        }
     }
 
     @Override
@@ -66,6 +71,7 @@ public class PhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
         ButterKnife.inject(this);
+        Toast.makeText(PhotoActivity.this,"拍照测试",Toast.LENGTH_SHORT).show();
         photoGet.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -81,10 +87,7 @@ public class PhotoActivity extends AppCompatActivity {
         nextTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(PhotoActivity.this,ElectrictorchActivity.class);
-                startActivity(intent);
-                MyApplication.getSession().set("photo",true);
-                finish();
+                showDialog();
             }
         });
         /*photoGet.setOnClickListener(new View.OnClickListener() {
@@ -208,5 +211,33 @@ public class PhotoActivity extends AppCompatActivity {
             default:
                 break;
         }
+    }
+    private void showDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("是否确认成功完成该项检测并跳转下一项测试");
+        dialog.setPositiveButton("成功",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        MyApplication.getSession().set("photo",true);
+                        Intent intent=new Intent(PhotoActivity.this, ElectrictorchActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+        dialog.setNeutralButton("失败", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                MyApplication.getSession().set("photo",false);
+                arg0.dismiss();
+                finish();
+
+            }
+        });
+        dialog.show();
     }
 }

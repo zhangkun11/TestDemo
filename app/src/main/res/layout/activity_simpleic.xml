@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:id="@+id/next_test"
-            android:text="下一项：条码扫描测试"/>
+            android:text="完成检测"/>
     </LinearLayout>
 
     <TextView

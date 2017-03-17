@@ -2,7 +2,9 @@ package com.example.admin.myapplication.meter;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.jb.meter.MeterController;
@@ -93,6 +95,11 @@ public class MeterActivity extends Activity implements View.OnClickListener {
                     if (!Tools.isEmpty(resultData)) {
                         if (adapter != null) {
                             adapter.addStr(resultData);
+
+                            showDialog();
+                        }
+                        else {
+                            MyApplication.getSession().set("meter",false);
                         }
                     }
                     if (adapter != null) {
@@ -102,6 +109,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
                     controler.Meter_Close();
                     resetEsam();
                     getRand();
+
                     break;
 
                 case 1001:
@@ -171,6 +179,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meter);
         ButterKnife.inject(this);
+        Toast.makeText(MeterActivity.this,"红外测试",Toast.LENGTH_SHORT).show();
         mWakeLockUtil = new WakeLockUtil(this);
         init();
         initSimpleIc();
@@ -188,7 +197,6 @@ public class MeterActivity extends Activity implements View.OnClickListener {
             public void onClick(View v) {
                 Intent intent=new Intent(MeterActivity.this, SimpleIcActivity.class);
                 startActivity(intent);
-                MyApplication.getSession().set("meter",true);
                 finish();
             }
         });
@@ -518,7 +526,10 @@ public class MeterActivity extends Activity implements View.OnClickListener {
     protected void onDestroy() {
         // TODO Auto-generated method stub
         super.onDestroy();
-        MyApplication.getSession().set("meter",true);
+        //MyApplication.getSession().set("meter",true);
+        if(MyApplication.getSession().getBoolean("meter")!=true){
+            MyApplication.getSession().set("meter",false);
+        }
 
         if (readThread != null) {
             readThread.interrupt();
@@ -1407,5 +1418,32 @@ public class MeterActivity extends Activity implements View.OnClickListener {
         public void setDataByte(byte[] dataByte) {
             this.dataByte = dataByte;
         }
+    }
+    private void showDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("检测成功，是否确认完成该项检测并跳转下一项测试");
+        dialog.setPositiveButton("是",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        MyApplication.getSession().set("meter",true);
+                        Intent intent=new Intent(MeterActivity.this, SimpleIcActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+        dialog.setNeutralButton("否", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                MyApplication.getSession().set("meter",true);
+                arg0.dismiss();
+
+            }
+        });
+        dialog.show();
     }
 }

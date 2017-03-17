@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="下一项：拍照测试"></Button>
+        android:text="完成检测"></Button>
     <!--<com.baidu.mapapi.map.MapView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

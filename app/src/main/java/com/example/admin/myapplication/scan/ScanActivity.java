@@ -1,7 +1,9 @@
 package com.example.admin.myapplication.scan;
 
 
+import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.jb.Preference;
@@ -74,6 +76,11 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 				}
 				if (codeType != null) {
 					code_type.setText(codeType);
+
+					showDialog();
+				}
+				if(codeType==null){
+					MyApplication.getSession().set("scan",false);
 				}
 				if (adapter != null) {
 					adapter.notifyDataSetChanged();
@@ -126,6 +133,7 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 		/*getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
 		setContentView(R.layout.act_scan);
+		Toast.makeText(ScanActivity.this,"一维条码扫描测试",Toast.LENGTH_SHORT).show();
 		showLoadinDialog();
 		mHandler.postDelayed(closeLodingIcon, 3000);
 
@@ -336,7 +344,10 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		MyApplication.getSession().set("scan",true);
+		//MyApplication.getSession().set("scan",true);
+		if(MyApplication.getSession().getBoolean("scan")!=true){
+			MyApplication.getSession().set("scan",false);
+		}
 		if (scanService != null) {
 			if (null != scanManager) {
 				System.out.println("ScanActivity Barcode_Stop5");
@@ -499,4 +510,30 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 			closeLoadinDialog();
 		}
 	};
+	private void showDialog(){
+		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+		dialog.setMessage("检测成功，是否确认完成该项检测");
+		dialog.setPositiveButton("是",
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+
+						MyApplication.getSession().set("scan",true);
+
+						finish();
+
+					}
+				});
+		dialog.setNeutralButton("否", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+                MyApplication.getSession().set("scan",true);
+				arg0.dismiss();
+
+			}
+		});
+		dialog.show();
+	}
 }

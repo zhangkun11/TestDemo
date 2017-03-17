@@ -1,6 +1,8 @@
 package com.example.admin.myapplication.simpleIc;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.jb.simpleic.SimpleIcController;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.admin.myapplication.MyApplication;
 import com.example.admin.myapplication.R;
@@ -65,6 +68,7 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simpleic);
         ButterKnife.inject(this);
+        Toast.makeText(SimpleIcActivity.this,"ESAM测试",Toast.LENGTH_SHORT).show();
         tv_show = (TextView) findViewById(R.id.textView1);
         Button btn0 = (Button) findViewById(R.id.button0);
         /*Button btn1 = (Button) findViewById(R.id.button1);
@@ -83,7 +87,7 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
             public void onClick(View v) {
                 Intent intent=new Intent(SimpleIcActivity.this, ScanActivity.class);
                 startActivity(intent);
-                MyApplication.getSession().set("esam",true);
+
                 finish();
             }
         });
@@ -126,8 +130,38 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
     protected void onDestroy() {
         // TODO Auto-generated method stub
         super.onDestroy();
-        MyApplication.getSession().set("esam",true);
+        //MyApplication.getSession().set("esam",true);
+        if(MyApplication.getSession().getBoolean("esam")!=true){
+            MyApplication.getSession().set("esam",false);
+        }
 
+    }
+    private void showDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("检测成功，是否确认完成该项检测并跳转下一项测试");
+        dialog.setPositiveButton("是",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        MyApplication.getSession().set("esam",true);
+                        Intent intent=new Intent(SimpleIcActivity.this, ScanActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+        dialog.setNeutralButton("否", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                MyApplication.getSession().set("esam",true);
+                arg0.dismiss();
+
+            }
+        });
+        dialog.show();
     }
 
     public void onClick(View v) {
@@ -227,6 +261,10 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
                             tv_show.setText(bytesToHexString(result));
                             if(bytesToHexString(result)==null){
                                 tv_show.setText("未读取到数据，请复位后重试");
+                                MyApplication.getSession().set("esam",false);
+                            }else {
+
+                                showDialog();
                             }
                             System.out
                                     .println("result:" + bytesToHexString(result));

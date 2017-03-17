@@ -12,6 +12,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/next_test"
         android:layout_margin="5dp"
-        android:text="下一项：定位测试"/>
+        android:text="完成检测"/>
 
 </LinearLayout>

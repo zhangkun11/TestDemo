@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:id="@+id/next_test"
-        android:text="下一项：  红外测试"/>
+        android:text="完成检测"/>
 
 
 </LinearLayout>

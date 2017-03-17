@@ -1,6 +1,8 @@
 package com.example.admin.myapplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
@@ -11,9 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Toast;
 import android.widget.ToggleButton;
-
-import com.example.admin.myapplication.meter.MeterActivity;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class ElectrictorchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.led_light);
         ButterKnife.inject(this);
+        Toast.makeText(ElectrictorchActivity.this,"手电筒测试",Toast.LENGTH_SHORT).show();
         try {
             if (mCamera == null) {
                 mCamera = Camera.open();
@@ -62,10 +64,7 @@ public class ElectrictorchActivity extends Activity {
         nextTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ElectrictorchActivity.this, MeterActivity.class);
-                startActivity(intent);
-                MyApplication.getSession().set("elec",true);
-                finish();
+               showDialog();
             }
         });
 
@@ -123,10 +122,41 @@ public class ElectrictorchActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MyApplication.getSession().set("elec",true);
+        //MyApplication.getSession().set("elec",true);
+        if(MyApplication.getSession().getBoolean("elec")!=true){
+            MyApplication.getSession().set("elec",false);
+        }
         isOn = false;
         btn.setChecked(isOn);
         mCamera.release();
+    }
+    private void showDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("是否确认成功完成该项检测并跳转下一项测试");
+        dialog.setPositiveButton("成功",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        MyApplication.getSession().set("elec",true);
+                        Intent intent=new Intent(ElectrictorchActivity.this, GpsActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+        dialog.setNeutralButton("失败", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                MyApplication.getSession().set("elec",false);
+                arg0.dismiss();
+                finish();
+
+            }
+        });
+        dialog.show();
     }
 
 
