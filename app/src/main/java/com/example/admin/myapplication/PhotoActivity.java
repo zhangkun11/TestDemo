@@ -48,6 +48,8 @@ public class PhotoActivity extends AppCompatActivity {
     private File outPutImage;
     private int touchX = 0, touchY = 0;
 
+    private boolean dialogEnable;
+
    /* @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction()==MotionEvent.ACTION_DOWN) {
@@ -67,10 +69,17 @@ public class PhotoActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        dialogEnable=false;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
         ButterKnife.inject(this);
+        dialogEnable=true;
         Toast.makeText(PhotoActivity.this,"拍照测试",Toast.LENGTH_SHORT).show();
         photoGet.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -238,6 +247,7 @@ public class PhotoActivity extends AppCompatActivity {
 
             }
         });
-        dialog.show();
+        if(dialogEnable==true){
+        dialog.show();}
     }
 }

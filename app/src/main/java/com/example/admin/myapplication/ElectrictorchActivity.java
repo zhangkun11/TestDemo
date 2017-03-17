@@ -30,6 +30,13 @@ public class ElectrictorchActivity extends Activity {
     private ElectrictorchController electrictorchController;
     private Camera mCamera;
     private SurfaceView sv;
+    private boolean dialogEnable;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dialogEnable=false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,7 @@ public class ElectrictorchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.led_light);
         ButterKnife.inject(this);
+        dialogEnable=true;
         Toast.makeText(ElectrictorchActivity.this,"手电筒测试",Toast.LENGTH_SHORT).show();
         try {
             if (mCamera == null) {
@@ -156,7 +164,8 @@ public class ElectrictorchActivity extends Activity {
 
             }
         });
-        dialog.show();
+        if(dialogEnable==true){
+        dialog.show();}
     }
 
 

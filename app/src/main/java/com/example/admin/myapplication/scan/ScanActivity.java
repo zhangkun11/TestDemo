@@ -51,6 +51,7 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 	public static boolean isContinues = false;;
 	public long intervalTime = 0;
 	private EditTextDialog etD;
+    private boolean dialogEnable;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -113,6 +114,7 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+        dialogEnable=false;
 		if (scanService != null)
 			scanService.setActivityUp(false);
 		ScanService.isScanActivityUp = true;
@@ -133,6 +135,7 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 		/*getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
 		setContentView(R.layout.act_scan);
+        dialogEnable=true;
 		Toast.makeText(ScanActivity.this,"一维条码扫描测试",Toast.LENGTH_SHORT).show();
 		showLoadinDialog();
 		mHandler.postDelayed(closeLodingIcon, 3000);
@@ -534,6 +537,7 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 
 			}
 		});
-		dialog.show();
+        if(dialogEnable==true){
+		dialog.show();}
 	}
 }

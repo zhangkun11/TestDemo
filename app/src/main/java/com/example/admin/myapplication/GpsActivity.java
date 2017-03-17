@@ -51,53 +51,16 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
     //android 原生GPS API ,LocationManager调用
     LocationManager locationManager;
     private boolean isGpsEnable = false, isShowProgress = false;
+    private boolean dialogEnable;
+    private boolean isContune;
 
     private ProgressDialog progressDialog;
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        //map
-        //SDKInitializer.initialize(getApplicationContext());
-
-
-        setContentView(R.layout.activity_gps);
-
-        ButterKnife.inject(this);
-        Toast.makeText(GpsActivity.this,"GPS测试",Toast.LENGTH_SHORT).show();
-
-
-        nextTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent=new Intent(GpsActivity.this,MeterActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        /*Fragment mapFragment= new BDMapFragment();
-        getFragmentManager().beginTransaction().replace(R.id.fragment,mapFragment).commit();*/
-
-
-        /**
-         * android gps api定位
-         */
-        //android gps api
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //从gps获取最近的位置信息
-        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            Toast.makeText(GpsActivity.this, "定位权限未获取，请在权限管理中打开定位授权", Toast.LENGTH_LONG).show();
-        }
+    protected void onStart() {
+        super.onStart();
+        dialogEnable=true;
         checkLocation();
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         updataView(location);
@@ -144,6 +107,54 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
 
     }
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //map
+        //SDKInitializer.initialize(getApplicationContext());
+
+
+        setContentView(R.layout.activity_gps);
+
+        ButterKnife.inject(this);
+        isContune=true;
+        Toast.makeText(GpsActivity.this,"GPS测试",Toast.LENGTH_SHORT).show();
+
+
+        nextTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(GpsActivity.this,MeterActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        /*Fragment mapFragment= new BDMapFragment();
+        getFragmentManager().beginTransaction().replace(R.id.fragment,mapFragment).commit();*/
+
+
+        /**
+         * android gps api定位
+         */
+        //android gps api
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //从gps获取最近的位置信息
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Toast.makeText(GpsActivity.this, "定位权限未获取，请在权限管理中打开定位授权", Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+
     private void updataView(Location location) {
         if (location != null) {
             StringBuilder currentPosition = new StringBuilder();
@@ -158,8 +169,11 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
 
             isShowProgress = false;
             handler.sendEmptyMessage(0);
-
+            if(isContune){
             showDialog();
+                isContune=false;
+            }
+
 
 
         } else {
@@ -189,6 +203,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
     protected void onPause() {
         super.onPause();
         //map.onPause();
+        dialogEnable=false;
     }
 
     @OnClick(R.id.gps_try)
@@ -258,7 +273,8 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
                     arg0.dismiss();
                 }
             });
-            dialog.show();
+            if(dialogEnable==true){
+            dialog.show();}
 
         }
     }
@@ -293,7 +309,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
     };
 
     private void showDialog(){
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("检测成功，是否确认完成该项检测并跳转下一项测试");
         dialog.setPositiveButton("是",
                 new DialogInterface.OnClickListener() {
@@ -304,6 +320,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
                         MyApplication.getSession().set("gps",true);
                         Intent intent=new Intent(GpsActivity.this, MeterActivity.class);
                         startActivity(intent);
+
                         finish();
 
                     }
@@ -317,7 +334,8 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
 
             }
         });
-        dialog.show();
+        if(dialogEnable==true){
+        dialog.show();}
     }
 
 

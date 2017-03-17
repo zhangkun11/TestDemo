@@ -17,14 +17,17 @@
                 android:id="@+id/screen_test"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_margin="5dp"
-                android:text="@string/screentest_name" />
+                android:text="@string/screentest_name"
+                />
 
             <Button
                 android:id="@+id/button_test"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+
                 android:text="2 按键测试" />
 
 
@@ -33,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+
                 android:text="@string/photo_name" />
 
             <Button
@@ -40,12 +44,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+
                 android:text="@string/flash_name" />
             <Button
                 android:id="@+id/gps_test"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+
                 android:text="@string/gpstest_name" />
 
 
@@ -54,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+
                 android:text="@string/meter_name" />
 
             <Button
@@ -61,6 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+
                 android:text="7 ESAM测试" />
 
             <Button
@@ -68,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+
                 android:text="8 条形码测试" />
         </LinearLayout>
     </ScrollView>

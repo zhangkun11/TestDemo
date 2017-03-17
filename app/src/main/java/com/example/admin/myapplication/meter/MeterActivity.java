@@ -79,6 +79,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
     private byte[] one = null;
     private int currentPro = Pro_Idle;
     private SimpleIcController pSamCon;
+    private boolean dialogEnable;
 
     Handler mHandler = new Handler() {
 
@@ -179,6 +180,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meter);
         ButterKnife.inject(this);
+        dialogEnable=true;
         Toast.makeText(MeterActivity.this,"红外测试",Toast.LENGTH_SHORT).show();
         mWakeLockUtil = new WakeLockUtil(this);
         init();
@@ -507,6 +509,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
     protected void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
+        dialogEnable=false;
         if (null != controler) {
             Log.i("info", "onPause:-------controler closed ");
             controler.Meter_Close();
@@ -1444,6 +1447,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 
             }
         });
-        dialog.show();
+        if(dialogEnable==true){
+        dialog.show();}
     }
 }

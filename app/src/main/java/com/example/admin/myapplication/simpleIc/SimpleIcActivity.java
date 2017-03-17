@@ -36,6 +36,7 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
             (byte) 0x84, (byte) 0x00, (byte) 0x00, (byte) 0x04,};// 产生随机数指令
     @InjectView(R.id.next_test)
     Button nextTest;
+    private boolean dialogEnable;
 
     private TextView tv_show;
     boolean bind = false;
@@ -62,12 +63,14 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simpleic);
         ButterKnife.inject(this);
+        dialogEnable=true;
         Toast.makeText(SimpleIcActivity.this,"ESAM测试",Toast.LENGTH_SHORT).show();
         tv_show = (TextView) findViewById(R.id.textView1);
         Button btn0 = (Button) findViewById(R.id.button0);
@@ -117,6 +120,7 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
     protected void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
+        dialogEnable=false;
         if (pSamCon != null)
             try {
                 pSamCon.Simpleic_Close();
@@ -161,7 +165,8 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
 
             }
         });
-        dialog.show();
+        if(dialogEnable==true){
+        dialog.show();}
     }
 
     public void onClick(View v) {

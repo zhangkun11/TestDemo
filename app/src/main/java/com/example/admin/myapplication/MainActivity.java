@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
             R.color.colorWhite,
             R.color.colorBlack,
             R.color.colorYellow};
+    private boolean dialogEnable;
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -47,10 +48,23 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        dialogEnable=true;
         text= (TextView) findViewById(R.id.textTest);
         Toast.makeText(MainActivity.this,"屏幕测试",Toast.LENGTH_SHORT).show();
         new Thread(runnable).start();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        dialogEnable=true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dialogEnable=false;
     }
 
     @Override
@@ -111,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-        dialog.show();
+        if(dialogEnable==true){
+        dialog.show();}
     }
 
 }

@@ -30,12 +30,14 @@ public class ButtonTestActivity extends AppCompatActivity {
     @InjectView(R.id.next_test)
     Button nextTest;
     StringBuilder stringBuilder;
+    private boolean dialogEnable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_button_test);
         ButterKnife.inject(this);
+        dialogEnable=true;
         Toast.makeText(ButtonTestActivity.this,"按键测试",Toast.LENGTH_SHORT).show();
         stringBuilder=new StringBuilder();
         stringBuilder.append("点击实体按键，核对按键与显示是否一致").append("\n");
@@ -151,6 +153,13 @@ public class ButtonTestActivity extends AppCompatActivity {
             MyApplication.getSession().set("button",false);
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dialogEnable=false;
+    }
+
     private void showDialog(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("是否确认成功完成该项检测并跳转下一项测试");
@@ -163,6 +172,7 @@ public class ButtonTestActivity extends AppCompatActivity {
                         MyApplication.getSession().set("button",true);
                         Intent intent=new Intent(ButtonTestActivity.this, PhotoActivity.class);
                         startActivity(intent);
+                        arg0.dismiss();
                         finish();
 
                     }
@@ -173,9 +183,12 @@ public class ButtonTestActivity extends AppCompatActivity {
             public void onClick(DialogInterface arg0, int arg1) {
                 MyApplication.getSession().set("button",false);
                 arg0.dismiss();
+                finish();
+
 
             }
         });
-        dialog.show();
+        if(dialogEnable==true){
+        dialog.show();}
     }
 }
