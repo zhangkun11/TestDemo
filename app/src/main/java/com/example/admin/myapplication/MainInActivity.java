@@ -89,13 +89,14 @@ public class MainInActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.i("info", "onStart: ");
+        //setButton();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Log.i("info", "onResume: ");
-
+        //setButton();
         new Thread(runnable).start();
 
     }
@@ -134,6 +135,7 @@ public class MainInActivity extends AppCompatActivity {
                 goToActivity(ElectrictorchActivity.class);
                 break;
             case R.id.simpleIc_test:
+                MyApplication.getSession().set("rs_4",false);
                 goToActivity(SimpleIcActivity.class);
                 break;
             case R.id.scan_test:
@@ -143,12 +145,14 @@ public class MainInActivity extends AppCompatActivity {
                 goToActivity(ButtonTestActivity.class);
                 break;
             case R.id.rs_test:
-                MyApplication.getSession().set("rs_4",false);
                 goToActivity(RS232Activity.class);
                 break;
             case R.id.rs4_test:
                 MyApplication.getSession().set("rs_4",true);
-                goToActivity(RS232Activity.class);
+                Intent intentd = new Intent(this, MeterActivity.class);
+                intentd.putExtra("From", "caobiao");
+                intentd.putExtra("IS485", true);
+                startActivity(intentd);
                 break;
             case R.id.nfc_test:
                 playTone(ToneGenerator.TONE_DTMF_1);
@@ -217,6 +221,10 @@ public class MainInActivity extends AppCompatActivity {
         boolean checkMeter = MyApplication.getSession().getBoolean("meter");
         boolean checkEsam = MyApplication.getSession().getBoolean("esam");
         boolean checkScan = MyApplication.getSession().getBoolean("scan");
+        boolean checkNfc = MyApplication.getSession().getBoolean("nfc");
+        boolean checkPs = MyApplication.getSession().getBoolean("ps");
+        boolean checkRs = MyApplication.getSession().getBoolean("rs");
+
         //boolean check=MyApplication.getSession().getBoolean("main");
         //Log.i("session", "setButton: =======    "+MyApplication.getSession().getObj("main"));
         if (checkMain == true && MyApplication.getSession().getObj("main") != null) {
@@ -282,6 +290,30 @@ public class MainInActivity extends AppCompatActivity {
         if (checkBut == false && MyApplication.getSession().getObj("button") != null) {
             buttonTest.setTextColor(getResources().getColor(R.color.colorRed));
             buttonTest.setText("2 按键测试（未成功）");
+        }
+        if (checkNfc == true && MyApplication.getSession().getObj("nfc") != null) {
+            nfcTest.setTextColor(getResources().getColor(R.color.colorGreen));
+            nfcTest.setText("11 NFC测试（成功）");
+        }
+        if (checkNfc == false && MyApplication.getSession().getObj("nfc") != null) {
+            nfcTest.setTextColor(getResources().getColor(R.color.colorRed));
+            nfcTest.setText("11 NFC测试（未成功）");
+        }
+        if (checkPs == true && MyApplication.getSession().getObj("ps") != null) {
+            rsTest.setTextColor(getResources().getColor(R.color.colorGreen));
+            rsTest.setText("9 串口/PS2测试（成功）");
+        }
+        if (checkPs == false && MyApplication.getSession().getObj("ps") != null) {
+            rsTest.setTextColor(getResources().getColor(R.color.colorRed));
+            rsTest.setText("9 串口/PS2测试（未成功）");
+        }
+        if (checkRs == true && MyApplication.getSession().getObj("rs") != null) {
+            rs4Test.setTextColor(getResources().getColor(R.color.colorGreen));
+            rs4Test.setText("10 RS485测试（成功）");
+        }
+        if (checkRs == false && MyApplication.getSession().getObj("rs") != null) {
+            rs4Test.setTextColor(getResources().getColor(R.color.colorRed));
+            rs4Test.setText("10 RS485测试（未成功）");
         }
 
     }

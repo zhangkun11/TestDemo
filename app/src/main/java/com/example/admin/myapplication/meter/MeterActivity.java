@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.admin.myapplication.MyApplication;
 import com.example.admin.myapplication.R;
+import com.example.admin.myapplication.nfc.NFCActivity;
 import com.example.admin.myapplication.simpleIc.SimpleIcActivity;
 import com.example.admin.myapplication.utils.Tools;
 import com.example.admin.myapplication.utils.WakeLockUtil;
@@ -115,8 +116,9 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 
                 case 1001:
                     resultData = (String) msg.obj;
-                    Toast.makeText(MeterActivity.this, resultData,
-                            Toast.LENGTH_SHORT).show();
+                    if(resultData!=null){
+                    showDialog();}
+                    //Toast.makeText(MeterActivity.this, resultData, Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;
@@ -181,7 +183,10 @@ public class MeterActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_meter);
         ButterKnife.inject(this);
         dialogEnable=true;
-        Toast.makeText(MeterActivity.this,"红外测试",Toast.LENGTH_SHORT).show();
+        if(MyApplication.getSession().getBoolean("rs_4")){
+            Toast.makeText(MeterActivity.this,"RS485测试",Toast.LENGTH_SHORT).show();
+        }else {
+        Toast.makeText(MeterActivity.this,"红外测试",Toast.LENGTH_SHORT).show();}
         mWakeLockUtil = new WakeLockUtil(this);
         init();
         initSimpleIc();
@@ -530,8 +535,11 @@ public class MeterActivity extends Activity implements View.OnClickListener {
         // TODO Auto-generated method stub
         super.onDestroy();
         //MyApplication.getSession().set("meter",true);
-        if(MyApplication.getSession().getBoolean("meter")!=true){
+        if(MyApplication.getSession().getBoolean("meter")!=true&&MyApplication.getSession().getBoolean("rs_4")==false){
             MyApplication.getSession().set("meter",false);
+        }
+        if(MyApplication.getSession().getBoolean("rs")!=true&&MyApplication.getSession().getBoolean("rs_4")==true){
+            MyApplication.getSession().set("rs",false);
         }
 
         if (readThread != null) {
@@ -1430,11 +1438,16 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-
+                        if(MyApplication.getSession().getBoolean("rs_4")){
+                            MyApplication.getSession().set("rs",true);
+                            Intent intent=new Intent(MeterActivity.this, NFCActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else {
                         MyApplication.getSession().set("meter",true);
                         Intent intent=new Intent(MeterActivity.this, SimpleIcActivity.class);
                         startActivity(intent);
-                        finish();
+                        finish();}
 
                     }
                 });
@@ -1442,7 +1455,11 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-                MyApplication.getSession().set("meter",true);
+                if(MyApplication.getSession().getBoolean("rs_4")){
+                    MyApplication.getSession().set("rs",true);
+                }else {
+                    MyApplication.getSession().set("meter", true);
+                }
                 arg0.dismiss();
 
             }

@@ -1,6 +1,8 @@
 package com.example.admin.myapplication.rs232;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.jb.rs232.RS232Controller;
 import android.jb.rs232.RS232Controller.Callback;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.admin.myapplication.MyApplication;
 import com.example.admin.myapplication.R;
+import com.example.admin.myapplication.meter.MeterActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -38,6 +41,7 @@ public class RS232Activity extends Activity implements Callback {
 							data.length));
 				else*/
                     tv.setText(new String(data));
+                    showDialog();
                     break;
 
                 default:
@@ -45,6 +49,22 @@ public class RS232Activity extends Activity implements Callback {
             }
         }
     };
+    private boolean dialogEnable;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(MyApplication.getSession().getBoolean("ps")!=true){
+            MyApplication.getSession().set("ps",false);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
 
     @Override
     protected void onResume() {
@@ -67,6 +87,7 @@ public class RS232Activity extends Activity implements Callback {
     protected void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
+        dialogEnable=false;
         if (rs232Con != null) {
             rs232Con.Rs232_Open(9600, 8, 'N', 1,
                     RS232Activity.this, this);
@@ -82,6 +103,7 @@ public class RS232Activity extends Activity implements Callback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rs232);
         ButterKnife.inject(this);
+        dialogEnable=true;
 
 
         tv = (TextView) findViewById(R.id.rs232_show_received_tv);
@@ -101,6 +123,7 @@ public class RS232Activity extends Activity implements Callback {
 										.hexString2Bytes(etStr));
 							else*/
                             rs232Con.Rs232_Write(etStr.getBytes());
+
                         } catch (Exception e) {
                             // TODO: handle exception
                             e.printStackTrace();
@@ -132,10 +155,7 @@ public class RS232Activity extends Activity implements Callback {
         int dataBit = 8;
         int stopBit = 1;
         char even = 'E';
-        if (MyApplication.getSession().getBoolean("rs_4") == true) {
-            baud = 2400;
-            psTitle.setText("RS485测试");
-        }
+
 
         rs232Con.Rs232_Open(baud, dataBit, even, stopBit,
                 RS232Activity.this, this);
@@ -148,4 +168,35 @@ public class RS232Activity extends Activity implements Callback {
         if (data != null)
             mHandler.sendMessage(mHandler.obtainMessage(0, data));
     }
+    private void showDialog(){
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("检测成功，是否确认完成该项检测并跳转下一项测试");
+        dialog.setPositiveButton("是",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        MyApplication.getSession().set("ps",true);
+                        Intent intent=new Intent(RS232Activity.this, MeterActivity.class);
+                        startActivity(intent);
+
+                        finish();
+
+                    }
+                });
+        dialog.setNeutralButton("否", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+
+                MyApplication.getSession().set("ps",true);
+                arg0.dismiss();
+
+            }
+        });
+        if(dialogEnable==true){
+            dialog.show();}
+    }
+
 }

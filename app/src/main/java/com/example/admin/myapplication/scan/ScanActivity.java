@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.androidquery.AQuery;
 import com.example.admin.myapplication.MyApplication;
 import com.example.admin.myapplication.R;
+import com.example.admin.myapplication.rs232.RS232Activity;
 
 import java.io.UnsupportedEncodingException;
 
@@ -515,7 +516,8 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 	};
 	private void showDialog(){
 		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-		dialog.setMessage("检测成功，是否确认完成该项检测");
+
+		dialog.setMessage("检测成功，是否确认完成该项检测并跳转下一项测试");
 		dialog.setPositiveButton("是",
 				new DialogInterface.OnClickListener() {
 
@@ -523,7 +525,8 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 					public void onClick(DialogInterface arg0, int arg1) {
 
 						MyApplication.getSession().set("scan",true);
-
+                        Intent intent=new Intent(ScanActivity.this, RS232Activity.class);
+                        startActivity(intent);
 						finish();
 
 					}

@@ -31,7 +31,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.example.admin.myapplication.MyApplication;
 import com.example.admin.myapplication.R;
+
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -58,12 +61,15 @@ public class NFCActivity extends Activity {
 			(byte) 0x11, (byte) 0x11, (byte) 0x11, (byte) 0x11, (byte) 0x11,
 			(byte) 0x11, (byte) 0x11, (byte) 0x11, (byte) 0x11, (byte) 0x11,
 			(byte) 0x11, (byte) 0x11 };
+	private boolean dialogEnable;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.nfc);
+		dialogEnable=true;
+        Toast.makeText(NFCActivity.this,"NFC测试",Toast.LENGTH_SHORT).show();
 
 		initView();
 
@@ -136,9 +142,18 @@ public class NFCActivity extends Activity {
 	}
 
 	@Override
+	protected void onStart() {
+		super.onStart();
+		dialogEnable=true;
+	}
+
+	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		if(MyApplication.getSession().getBoolean("nfc")!=true){
+			MyApplication.getSession().set("nfc",false);
+		}
 	}
 
 	private void initView() {
@@ -222,6 +237,7 @@ public class NFCActivity extends Activity {
 		if (tag == null)
 			return;
 		final byte[] id = tag.getId();
+        dialogEnable=true;
 		String str = bytesToHexString(tag.getId());
 		// if (str.contains("4555425e") || str.contains("1467c2ad")) {
 		// Intent intent2 = new Intent(this, HaiMinTestActivity.class);
@@ -237,6 +253,7 @@ public class NFCActivity extends Activity {
 		}
 		String[] techList = tag.getTechList();
 
+
 		if (techList != null && techList.length > 0) {
 
 			if (cardTypeTv != null) {
@@ -251,6 +268,11 @@ public class NFCActivity extends Activity {
 					sb.append("\n");
 				}
 				cardTypeTv.setText(sb.subSequence(0, sb.length() - 1));
+
+
+				Log.i("info", "onNewIntent: "+dialogEnable);
+				showDialog();
+
 
 			}
 
@@ -550,6 +572,7 @@ public class NFCActivity extends Activity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		dialogEnable=false;
 		if (nfcAdapter != null) {
 			nfcAdapter.disableForegroundDispatch(this);
 		}
@@ -568,10 +591,35 @@ public class NFCActivity extends Activity {
 		}
 	}
 
-	public void onReadAndWrite(View view) {
-		Intent intent = new Intent(NFCActivity.this, NfcReadWriteActivity.class);
-		startActivity(intent);
+	private void showDialog(){
+		final AlertDialog.Builder dialog = new AlertDialog.Builder(NFCActivity.this);
+		dialog.setMessage("检测成功，是否确认完成该项检测");
+		dialog.setPositiveButton("是",
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+
+						MyApplication.getSession().set("nfc",true);
+
+						finish();
+
+					}
+				});
+		dialog.setNeutralButton("否", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				MyApplication.getSession().set("nfc",true);
+				arg0.dismiss();
+
+			}
+		});
+
+		if(dialogEnable==true){
+			dialog.show();}
 	}
+
 
 	// /**
 	// * Show the {@link ReadTag}.
