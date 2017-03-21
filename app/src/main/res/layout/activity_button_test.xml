@@ -3,6 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        style="@style/item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="按键测试:"></TextView>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button_show"

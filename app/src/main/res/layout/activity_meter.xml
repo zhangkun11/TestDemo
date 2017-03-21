@@ -10,8 +10,14 @@
     android:paddingLeft="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
+    <TextView
+        style="@style/item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rs_4"
+        android:text="红外测试:"/>
 
-    <EditText
+   <!-- <EditText
         android:id="@+id/bdz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +25,7 @@
         android:layout_marginTop="10dp"
         android:digits="0123456789ABCDEFabcdef"
         android:hint="@string/enter_address"
-        android:textSize="16sp" />
+        android:textSize="16sp" />-->
 
     <EditText
         android:id="@+id/bz"
@@ -161,8 +167,8 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/scan_lv"
+    <TextView
+        android:id="@+id/meter_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />

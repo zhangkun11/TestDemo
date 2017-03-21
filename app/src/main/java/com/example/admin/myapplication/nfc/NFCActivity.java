@@ -69,7 +69,7 @@ public class NFCActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.nfc);
 		dialogEnable=true;
-        Toast.makeText(NFCActivity.this,"NFC测试",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(NFCActivity.this,"NFC测试",Toast.LENGTH_SHORT).show();
 
 		initView();
 
@@ -224,10 +224,17 @@ public class NFCActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		dialogEnable=true;
 		if (nfcAdapter != null) {
 			nfcAdapter.enableForegroundDispatch(this, mPendingIntent, null,
 					null);
 		}
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		dialogEnable=false;
 	}
 
 	@Override

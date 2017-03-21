@@ -8,13 +8,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+        <TextView
+            style="@style/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ESAM测试:"></TextView>
 
         <Button
             android:layout_margin="5dp"
             android:id="@+id/button0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/simple_reset" />
+            android:text="@string/simple_reset"
+            android:visibility="gone"/>
 
         <!--<Button
             android:id="@+id/button1"

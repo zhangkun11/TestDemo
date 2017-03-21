@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.admin.myapplication.MyApplication;
 import com.example.admin.myapplication.R;
@@ -71,7 +70,7 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
         setContentView(R.layout.activity_simpleic);
         ButterKnife.inject(this);
         dialogEnable=true;
-        Toast.makeText(SimpleIcActivity.this,"ESAM测试",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SimpleIcActivity.this,"ESAM测试",Toast.LENGTH_SHORT).show();
         tv_show = (TextView) findViewById(R.id.textView1);
         Button btn0 = (Button) findViewById(R.id.button0);
         /*Button btn1 = (Button) findViewById(R.id.button1);
@@ -101,6 +100,7 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
+        dialogEnable=true;
         pSamCon = SimpleIcController.getInstance();
 
         try {
@@ -265,8 +265,14 @@ public class SimpleIcActivity extends Activity implements OnClickListener {
                         if (tv_show != null) {
                             tv_show.setText(bytesToHexString(result));
                             if(bytesToHexString(result)==null){
-                                tv_show.setText("未读取到数据，请复位后重试");
-                                MyApplication.getSession().set("esam",false);
+                                result = pSamCon.Simpleic_Write(createRandomCom2);
+                                if(bytesToHexString(result)==null){
+                                tv_show.setText("未读取到数据，请重试");
+                                MyApplication.getSession().set("esam",false);}
+                                else {
+                                    tv_show.setText(bytesToHexString(result));
+                                    showDialog();
+                                }
                             }else {
 
                                 showDialog();

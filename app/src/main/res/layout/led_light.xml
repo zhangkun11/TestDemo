@@ -9,6 +9,12 @@
     android:paddingLeft="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
+    <TextView
+        style="@style/item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="手电筒测试:"></TextView>
 
     <FrameLayout
         android:layout_width="wrap_content"

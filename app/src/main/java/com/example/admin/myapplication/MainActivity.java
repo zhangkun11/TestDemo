@@ -68,6 +68,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        dialogEnable=true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dialogEnable=false;
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction()==MotionEvent.ACTION_DOWN){
             showDialog();

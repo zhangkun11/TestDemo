@@ -24,6 +24,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="@string/rs232_send" />
+    <Button
+        android:id="@+id/rs232_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="完成检测" />
 
     <TextView
         android:layout_width="match_parent"

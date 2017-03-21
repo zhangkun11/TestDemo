@@ -135,7 +135,7 @@ public class MainInActivity extends AppCompatActivity {
                 goToActivity(ElectrictorchActivity.class);
                 break;
             case R.id.simpleIc_test:
-                MyApplication.getSession().set("rs_4",false);
+
                 goToActivity(SimpleIcActivity.class);
                 break;
             case R.id.scan_test:
@@ -206,6 +206,7 @@ public class MainInActivity extends AppCompatActivity {
 
     @OnClick(R.id.meter_test)
     public void onClick() {
+        MyApplication.getSession().set("rs_4",false);
         Intent intentd = new Intent(MainInActivity.this, MeterActivity.class);
         intentd.putExtra("From", "caobiao");
         intentd.putExtra("IS485", false);

@@ -128,6 +128,18 @@ public class ElectrictorchActivity extends Activity {
 
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        dialogEnable=false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dialogEnable=true;
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //MyApplication.getSession().set("elec",true);

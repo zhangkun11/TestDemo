@@ -6,13 +6,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.jb.meter.MeterController;
 import android.jb.simpleic.SimpleIcController;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +42,10 @@ public class MeterActivity extends Activity implements View.OnClickListener {
     private final int Pro_Two = 2;
     @InjectView(R.id.next_test)
     Button nextTest;
+    @InjectView(R.id.rs_4)
+    TextView rs4;
+    @InjectView(R.id.meter_lv)
+    TextView scanLv;
 
     // 视图
     private CheckBox continueCb;
@@ -81,6 +83,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
     private int currentPro = Pro_Idle;
     private SimpleIcController pSamCon;
     private boolean dialogEnable;
+    private int checkData=0;
 
     Handler mHandler = new Handler() {
 
@@ -91,33 +94,38 @@ public class MeterActivity extends Activity implements View.OnClickListener {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1000:
-                    resultData = (String) msg.obj;
+                    byte[] data = (byte[]) msg.obj;
+                    Log.i("info", "handleMessage: "+resultData);
                     // Log.i("info", "msg.obj == " + resultData);
                     // jiegou.setText(resultData);
-                    if (!Tools.isEmpty(resultData)) {
+                    /*if (!Tools.isEmpty(resultData)) {
                         if (adapter != null) {
                             adapter.addStr(resultData);
 
                             showDialog();
-                        }
-                        else {
-                            MyApplication.getSession().set("meter",false);
+                        } else {
+                            MyApplication.getSession().set("meter", false);
                         }
                     }
                     if (adapter != null) {
                         adapter.notifyDataSetChanged();
                         lv.setSelection(adapter.getCount() - 1);
-                    }
-                    controler.Meter_Close();
-                    resetEsam();
-                    getRand();
+                    }*/
+                    scanLv.setText(Tools.bytesToHexString(data, 0,
+                            data.length));
+                    showDialog();
+                    //scanLv.setText(resultData);
+                    //controler.Meter_Close();
+                    //resetEsam();
+                    //getRand();
 
                     break;
 
                 case 1001:
                     resultData = (String) msg.obj;
-                    if(resultData!=null){
-                    showDialog();}
+                    if (resultData != null) {
+                        showDialog();
+                    }
                     //Toast.makeText(MeterActivity.this, resultData, Toast.LENGTH_SHORT).show();
                     break;
                 default:
@@ -182,29 +190,40 @@ public class MeterActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meter);
         ButterKnife.inject(this);
-        dialogEnable=true;
-        if(MyApplication.getSession().getBoolean("rs_4")){
-            Toast.makeText(MeterActivity.this,"RS485测试",Toast.LENGTH_SHORT).show();
-        }else {
-        Toast.makeText(MeterActivity.this,"红外测试",Toast.LENGTH_SHORT).show();}
+        dialogEnable = true;
+        if (MyApplication.getSession().getBoolean("rs_4")) {
+            rs4.setText("RS485测试:");
+            //Toast.makeText(MeterActivity.this, "RS485测试", Toast.LENGTH_SHORT).show();
+        } else {
+            rs4.setText("红外测试:");
+            //Toast.makeText(MeterActivity.this, "红外测试", Toast.LENGTH_SHORT).show();
+        }
         mWakeLockUtil = new WakeLockUtil(this);
         init();
         initSimpleIc();
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MeterActivity.this);
-        bdzInfo = preferences.getString("meter_edit", null);
-        if (bdzInfo != null) {
+        /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MeterActivity.this);
+        bdzInfo = preferences.getString("meter_edit", null);*/
+       /* if (bdzInfo != null) {
             bdz.setText(bdzInfo);
-        }
+        }*/
 
 
         send.setOnClickListener(this);
         nextTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MeterActivity.this, SimpleIcActivity.class);
-                startActivity(intent);
-                finish();
+                if (MyApplication.getSession().getBoolean("rs_4")) {
+
+                    Intent intent = new Intent(MeterActivity.this, NFCActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+
+                    Intent intent = new Intent(MeterActivity.this, SimpleIcActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -412,7 +431,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 
         //continueCb = (CheckBox) findViewById(R.id.chaobiao_continue_cb);
         isContinues = false;
-		/*continueCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*continueCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
@@ -479,9 +498,9 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 			}
 		});*/
 
-        adapter = new myListAdapter(this);
+       /* adapter = new myListAdapter(this);
         lv = (ListView) findViewById(R.id.scan_lv);
-        lv.setAdapter(adapter);
+        lv.setAdapter(adapter);*/
     }
 
     @Override
@@ -495,6 +514,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
+        dialogEnable=true;
         sendBroadcast(new Intent("ReleaseCom"));
         if (null != controler) {
             Log.i("info", "onResume: ------controler closed");
@@ -514,7 +534,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
     protected void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
-        dialogEnable=false;
+        dialogEnable = false;
         if (null != controler) {
             Log.i("info", "onPause:-------controler closed ");
             controler.Meter_Close();
@@ -535,11 +555,11 @@ public class MeterActivity extends Activity implements View.OnClickListener {
         // TODO Auto-generated method stub
         super.onDestroy();
         //MyApplication.getSession().set("meter",true);
-        if(MyApplication.getSession().getBoolean("meter")!=true&&MyApplication.getSession().getBoolean("rs_4")==false){
-            MyApplication.getSession().set("meter",false);
+        if (MyApplication.getSession().getBoolean("meter") != true && MyApplication.getSession().getBoolean("rs_4") == false) {
+            MyApplication.getSession().set("meter", false);
         }
-        if(MyApplication.getSession().getBoolean("rs")!=true&&MyApplication.getSession().getBoolean("rs_4")==true){
-            MyApplication.getSession().set("rs",false);
+        if (MyApplication.getSession().getBoolean("rs") != true && MyApplication.getSession().getBoolean("rs_4") == true) {
+            MyApplication.getSession().set("rs", false);
         }
 
         if (readThread != null) {
@@ -550,7 +570,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
     }
 
     private void findView() {
-        bdz = (EditText) findViewById(R.id.bdz);
+        //bdz = (EditText) findViewById(R.id.bdz);
         send = (Button) findViewById(R.id.caobiao_send);
         jiegou = (TextView) findViewById(R.id.caobiao_jiegou);
 		/*sp9701 = (Spinner) findViewById(R.id.spinner_1_97);
@@ -567,16 +587,16 @@ public class MeterActivity extends Activity implements View.OnClickListener {
         switch (arg0.getId()) {
             case R.id.caobiao_send:
 
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MeterActivity.this).edit();
+                /*SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MeterActivity.this).edit();
                 editor.putString("meter_edit", String.valueOf(bdz.getText()));
-                editor.apply();
+                editor.apply();*/
                 /**
                  * 必须打开红外控制器
                  */
-                if (caobiao == 0) {
+               /* if (caobiao == 0) {
                     controler.Meter_Open(MeterController.METER_Infrared, 1200, 8, 'E',
                             1, portData, this);
-                }
+                }*/
 
                 Log.i("info", "onClick: send======" + controler.Meter_GetType() + "    closed");
                 if (controler.Meter_GetType()) {
@@ -585,45 +605,19 @@ public class MeterActivity extends Activity implements View.OnClickListener {
                     changeTo485(07);
                 }
                 bz = "00010000";
+                //bz="FEFEFEFE6832003200685BFFFFFFFF010A600000010BCE16";
+                //Tools.hexString2Bytes("FEFEFEFE6832003200685BFFFFFFFF010A600000010BCE16")
+                Log.i("info", "onClick: " + bz);
 
                 jiegou.setText("");
-                bdzString = bdz.getText().toString().trim();
-                Log.i("info", "bdzString  = " + bdzString);
-                if (bdzString.length() == 0 || bdzString.equals("")) {
-                    Toast.makeText(MeterActivity.this,
-                            getResources().getText(R.string.enter_address),
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (bdzString.equals("")
-                        || bdzString.substring(0, 1).equals("0123456789ABCDEF")) {
-                    Toast.makeText(
-                            MeterActivity.this,
-                            getResources().getText(
-                                    R.string.Please_select_Infrared_order),
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Log.i("info", "bz == " + bz);
-                if (bz.length() != 4 && bz.length() != 8) {
-                    Log.i("info", "bz.length = " + bz.toString().trim().length());
-                    Toast.makeText(
-                            MeterActivity.this,
-                            getResources().getText(
-                                    R.string.Please_select_Infrared_order),
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (bdzString.length() > 12) {
-                    Toast.makeText(
-                            MeterActivity.this,
-                            getResources().getText(
-                                    R.string.address_length_cross_border),
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                // controler.power_up(controler.getIs485());
-                sendMscToDianbiao(bdzString, bz.toString().trim());
+                scanLv.setText("");
+
+                //sendMscToDianbiao("123", bz.toString().trim());
+                //setCurrentPro(Pro_One);
+                //if (null != controler) {
+                    //Tools.hexString2Bytes("FEFEFEFE6832003200685BFFFFFFFF010A600000010BCE16")
+                    controler.writeCommand(Tools.hexString2Bytes("FEFEFEFE6832003200685BFFFFFFFF010A600000010BCE16"));
+                //}
 
                 break;
         }
@@ -672,6 +666,42 @@ public class MeterActivity extends Activity implements View.OnClickListener {
         @Override
         public void Meter_Read(byte[] buffer, int size) {
             // TODO Auto-generated method stub
+
+            Log.i("info", "Meter_Read: " + Tools.bytesToHexString(buffer));
+            String reult = Tools.bytesToHexString(buffer);
+            if (buffer != null) {
+                //checkData++;
+                if ((!reult.contains("fe")||!reult.contains("ff"))&&reult.length()==48) {
+                    mHandler.sendMessage(mHandler.obtainMessage(1000, buffer));
+                    //checkData=0;
+                }
+            }
+            //String reult = Tools.bytesToHexString(buffer);
+           /* resultData = Tools.bytesToHexString(buffer);
+
+            scanLv.setText(resultData);
+            controler.Meter_Close();*/
+            //if (reult.equals("6842004200688801511a07010a600000010b01511a07e516")) {
+               /* Message message=new Message();
+                message.what=1000;
+                message.obj=reult;
+                mHandler.sendMessage(message);*/
+            //}
+            /*if (!Tools.isEmpty(resultData)) {
+                if (adapter != null) {
+                    adapter.addStr(resultData);
+
+                    showDialog();
+                }
+                else {
+                    MyApplication.getSession().set("meter",false);
+                }
+            }
+            if (adapter != null) {
+                adapter.notifyDataSetChanged();
+                lv.setSelection(adapter.getCount() - 1);
+            }
+            controler.Meter_Close();*/
             if (null != controler) {
                 SerialPortData serialPortData = new SerialPortData(buffer, size);
                 if (controler.Meter_GetType()) {
@@ -1336,7 +1366,8 @@ public class MeterActivity extends Activity implements View.OnClickListener {
         Log.i("info", "sendBuffer === " + Tools.bytesToHexString(sendBuffer));
         setCurrentPro(Pro_One);
         if (null != controler) {
-            controler.writeCommand(sendBuffer);
+            //Tools.hexString2Bytes("FEFEFEFE6832003200685BFFFFFFFF010A600000010BCE16")
+            controler.writeCommand(Tools.hexString2Bytes("FEFEFEFE6832003200685BFFFFFFFF010A600000010BCE16"));
         }
     }
 
@@ -1430,7 +1461,8 @@ public class MeterActivity extends Activity implements View.OnClickListener {
             this.dataByte = dataByte;
         }
     }
-    private void showDialog(){
+
+    private void showDialog() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("检测成功，是否确认完成该项检测并跳转下一项测试");
         dialog.setPositiveButton("是",
@@ -1438,16 +1470,17 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        if(MyApplication.getSession().getBoolean("rs_4")){
-                            MyApplication.getSession().set("rs",true);
-                            Intent intent=new Intent(MeterActivity.this, NFCActivity.class);
+                        if (MyApplication.getSession().getBoolean("rs_4")) {
+                            MyApplication.getSession().set("rs", true);
+                            Intent intent = new Intent(MeterActivity.this, NFCActivity.class);
                             startActivity(intent);
                             finish();
-                        }else {
-                        MyApplication.getSession().set("meter",true);
-                        Intent intent=new Intent(MeterActivity.this, SimpleIcActivity.class);
-                        startActivity(intent);
-                        finish();}
+                        } else {
+                            MyApplication.getSession().set("meter", true);
+                            Intent intent = new Intent(MeterActivity.this, SimpleIcActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
 
                     }
                 });
@@ -1455,16 +1488,17 @@ public class MeterActivity extends Activity implements View.OnClickListener {
 
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-                if(MyApplication.getSession().getBoolean("rs_4")){
-                    MyApplication.getSession().set("rs",true);
-                }else {
+                if (MyApplication.getSession().getBoolean("rs_4")) {
+                    MyApplication.getSession().set("rs", true);
+                } else {
                     MyApplication.getSession().set("meter", true);
                 }
                 arg0.dismiss();
 
             }
         });
-        if(dialogEnable==true){
-        dialog.show();}
+        if (dialogEnable == true) {
+            dialog.show();
+        }
     }
 }

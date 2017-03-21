@@ -119,14 +119,17 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
 
         ButterKnife.inject(this);
         isContune=true;
-        Toast.makeText(GpsActivity.this,"GPS测试",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(GpsActivity.this,"GPS测试",Toast.LENGTH_SHORT).show();
 
 
         nextTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                MyApplication.getSession().set("rs_4",false);
                 Intent intent=new Intent(GpsActivity.this,MeterActivity.class);
+                intent.putExtra("From", "caobiao");
+                intent.putExtra("IS485", false);
                 startActivity(intent);
                 finish();
             }
@@ -197,6 +200,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
     protected void onResume() {
         super.onResume();
         //map.onResume();
+        dialogEnable=true;
     }
 
     @Override
@@ -236,6 +240,13 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
         }
 
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dialogEnable=false;
+    }
+
 
     @Override
     public void getMsg(String stringBuilder) {
@@ -318,7 +329,10 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
                     public void onClick(DialogInterface arg0, int arg1) {
 
                         MyApplication.getSession().set("gps",true);
+                        MyApplication.getSession().set("rs_4",false);
                         Intent intent=new Intent(GpsActivity.this, MeterActivity.class);
+                        intent.putExtra("From", "caobiao");
+                        intent.putExtra("IS485", false);
                         startActivity(intent);
 
                         finish();

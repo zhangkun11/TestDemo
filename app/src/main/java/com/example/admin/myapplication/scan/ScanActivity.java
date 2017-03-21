@@ -125,6 +125,7 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		dialogEnable=true;
 		if (scanService != null)
 			scanService.setActivityUp(true);
 		ScanService.isScanActivityUp = false;
@@ -137,7 +138,7 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
 		setContentView(R.layout.act_scan);
         dialogEnable=true;
-		Toast.makeText(ScanActivity.this,"一维条码扫描测试",Toast.LENGTH_SHORT).show();
+		//Toast.makeText(ScanActivity.this,"一维条码扫描测试",Toast.LENGTH_SHORT).show();
 		showLoadinDialog();
 		mHandler.postDelayed(closeLodingIcon, 3000);
 
@@ -332,10 +333,13 @@ public class ScanActivity extends BaseActivity implements ScanListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.scan_clean_btn:
-			System.out.println("onClick");
+			/*System.out.println("onClick");
 			if (adapter != null)
 				adapter.cleanData();
-			adapter.notifyDataSetChanged();
+			adapter.notifyDataSetChanged();*/
+			Intent intent=new Intent(ScanActivity.this,RS232Activity.class);
+			startActivity(intent);
+			finish();
 			break;
 
 		default:

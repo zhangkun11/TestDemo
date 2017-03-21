@@ -75,12 +75,18 @@ public class PhotoActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        dialogEnable=true;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
         ButterKnife.inject(this);
         dialogEnable=true;
-        Toast.makeText(PhotoActivity.this,"拍照测试",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(PhotoActivity.this,"拍照测试",Toast.LENGTH_SHORT).show();
         photoGet.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -96,6 +102,7 @@ public class PhotoActivity extends AppCompatActivity {
         nextTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialogEnable=true;
                 showDialog();
             }
         });

@@ -22,6 +22,11 @@
         android:onClick="onClick"
         android:padding="0dip"
         android:textColor="@android:color/black" />
+    <TextView
+        style="@style/item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="一维条码扫描测试:"></TextView>
 
     <RelativeLayout
         android:layout_width="match_parent"

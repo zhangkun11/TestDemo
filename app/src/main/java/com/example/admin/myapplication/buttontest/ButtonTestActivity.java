@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.admin.myapplication.MyApplication;
 import com.example.admin.myapplication.PhotoActivity;
@@ -38,7 +37,7 @@ public class ButtonTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_button_test);
         ButterKnife.inject(this);
         dialogEnable=true;
-        Toast.makeText(ButtonTestActivity.this,"按键测试",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ButtonTestActivity.this,"按键测试",Toast.LENGTH_SHORT).show();
         stringBuilder=new StringBuilder();
         stringBuilder.append("点击实体按键，核对按键与显示是否一致").append("\n");
 
@@ -158,6 +157,12 @@ public class ButtonTestActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         dialogEnable=false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dialogEnable=true;
     }
 
     private void showDialog(){
