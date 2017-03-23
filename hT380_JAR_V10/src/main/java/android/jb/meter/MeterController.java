@@ -380,6 +380,7 @@ public class MeterController {
 		byte[] buffer1;
 
 		public void run() {
+			System.out.println("run() + begin:" + begin);
 			while (begin) {
 				// System.out.println("run() + begin:" + begin);
 				// read();
@@ -387,6 +388,7 @@ public class MeterController {
 					try {
 						int size;
 						if (mInputStream == null) {
+							Log.i(TAG, "run: ------>null");
 							return;
 						}
 						// System.out.println("read() + begin:" + begin);
@@ -411,7 +413,9 @@ public class MeterController {
 						}
 						if (mInputStream == null)
 							return;
+						Log.i("info", "run: ------>true");
 						cout = mInputStream.available();
+						Log.i("info", "run: ------>true======"+cout);
 						buffer1 = new byte[cout];
 						size = mInputStream.read(buffer1);
 						System.out.println("size ==== " + size);

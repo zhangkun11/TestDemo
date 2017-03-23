@@ -671,7 +671,7 @@ public class MeterActivity extends Activity implements View.OnClickListener {
             String reult = Tools.bytesToHexString(buffer);
             if (buffer != null) {
                 //checkData++;
-                if ((!reult.contains("fe")||!reult.contains("ff"))&&reult.length()==48) {
+                if ((!reult.contains("fe")||!reult.contains("ff"))&&(reult.length()==48||reult.length()==52)) {
                     mHandler.sendMessage(mHandler.obtainMessage(1000, buffer));
                     //checkData=0;
                 }

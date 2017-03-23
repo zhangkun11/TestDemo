@@ -53,19 +53,45 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
     private boolean isGpsEnable = false, isShowProgress = false;
     private boolean dialogEnable;
     private boolean isContune;
+    private int count;
+    private boolean isCount,ischeckLoca;
 
     private ProgressDialog progressDialog;
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    Thread.sleep(1000);
+                    if(isCount){
+                    count++;}
+                    else {
+                        count=0;
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                handler.sendEmptyMessage(0);
+            }
+
+        }
+    };
 
 
     @Override
     protected void onStart() {
         super.onStart();
         dialogEnable=true;
+
+        ischeckLoca=true;
+
         checkLocation();
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        updataView(location);
-        //每三秒获取一次gps定位信息
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 8, new LocationListener() {
+        isGpsEnable=true;
+        //updataView(location);
+        //每1秒获取一次gps定位信息
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, new LocationListener() {
 
             @Override
             public void onLocationChanged(Location location) {
@@ -101,6 +127,11 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
 
             @Override
             public void onProviderDisabled(String provider) {
+                Log.i("info", "onProviderDisabled:    try......");
+                gpsInfo.setText("正在自动查询定位信息...");
+                if(ischeckLoca){
+                checkLocation();
+                ischeckLoca=false;}
                 updataView(null);
             }
         });
@@ -134,6 +165,11 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
                 finish();
             }
         });
+        count=0;
+        isCount=true;
+
+        gpsInfo.setText("定位信息：自动查询中...");
+        new Thread(runnable).start();
         /*Fragment mapFragment= new BDMapFragment();
         getFragmentManager().beginTransaction().replace(R.id.fragment,mapFragment).commit();*/
 
@@ -156,11 +192,15 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
         }
 
 
+
+
     }
 
     private void updataView(Location location) {
         if (location != null) {
+
             StringBuilder currentPosition = new StringBuilder();
+            Log.i("info", "updataView: before " + currentPosition);
             currentPosition.append("纬度：").append(location.getLatitude()).append("\n");
             currentPosition.append("经度：").append(location.getLongitude()).append("\n");
             currentPosition.append("高度：").append(location.getAltitude()).append("\n");
@@ -171,11 +211,13 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
             gpsInfo.setText(currentPosition);
 
             isShowProgress = false;
+            isCount=false;
             handler.sendEmptyMessage(0);
             if(isContune){
             showDialog();
                 isContune=false;
             }
+
 
 
 
@@ -190,7 +232,9 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
                 Toast.makeText(GpsActivity.this, "查询GPS信息中...", Toast.LENGTH_LONG).show();
 
                 isShowProgress = true;
-                handler.sendEmptyMessage(0);
+                Message message=new Message();
+                message.what=1;
+                handler.sendMessage(message);
             }
 
         }
@@ -224,6 +268,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
         }
         checkLocation();
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        isContune=true;
         updataView(location);
 
         //回调函数测试
@@ -274,6 +319,7 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
                             Intent intent = new Intent(
                                     Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             startActivityForResult(intent, 0); // 设置完成后返回到原来的界面
+                            count=0;
 
                         }
                     });
@@ -282,6 +328,8 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
                     arg0.dismiss();
+                    MyApplication.getSession().set("gps",false);
+                    finish();
                 }
             });
             if(dialogEnable==true){
@@ -315,7 +363,21 @@ public class GpsActivity extends AppCompatActivity implements CallBack {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            if(isCount){
+            gpsInfo.setText("定位信息：自动查询中...   ("+count+"s)");
+            if(count==120){
+                //if(MyApplication.getSession().getBoolean("gps")==false){
+                    MyApplication.getSession().set("gps",false);
+                    gpsInfo.setText("定位信息获取失败！");
+                    finish();
+                //}
+            }
+            }else {
+
+            }
+            if(msg.what==1){
             showProgressCheck();
+            }
         }
     };
 

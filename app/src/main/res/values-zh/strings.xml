@@ -60,7 +60,7 @@
     <string name="bluetooth_connect_failed">连接失败</string>
     <string name="bluetooth_connection_broken">连接断开</string>
     <string name="bluetooth_reconnect">重连</string>
-    <string name="app_name">掌机测试程序</string>
+    <string name="app_name">K5A掌机测试程序(V1.1)</string>
     <string name="app_nameNoV">HT380D_测试程序</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">扫描</string>

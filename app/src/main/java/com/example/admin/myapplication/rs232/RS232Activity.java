@@ -46,7 +46,8 @@ public class RS232Activity extends Activity implements Callback {
 				else*/
                     //tv.setText(new String(data));
                     if (Tools.bytesToHexString(data, 0,
-                            data.length).length() == 48) {
+                            data.length).length() == 48||Tools.bytesToHexString(data, 0,
+                            data.length).length()==52) {
                         tv.setText(Tools.bytesToHexString(data, 0,
                                 data.length));
                         showDialog();
@@ -123,6 +124,7 @@ public class RS232Activity extends Activity implements Callback {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
+                tv.setText("");
                 try {
                     String etStr = "FEFEFEFE6832003200685BFFFFFFFF010A600000010BCE16";
                     if (etStr != null && !etStr.trim().equals("")) {
