@@ -16,6 +16,7 @@ import android.widget.Button;
 
 import com.example.admin.myapplication.buttontest.ButtonTestActivity;
 import com.example.admin.myapplication.meter.MeterActivity;
+import com.example.admin.myapplication.meter.ReadAddress;
 import com.example.admin.myapplication.nfc.NFCActivity;
 import com.example.admin.myapplication.rs232.RS232Activity;
 import com.example.admin.myapplication.scan.ScanActivity;
@@ -52,6 +53,8 @@ public class MainInActivity extends AppCompatActivity {
     Button nfcTest;
     @InjectView(R.id.rs4_test)
     Button rs4Test;
+    @InjectView(R.id.readaddress_test)
+    Button readaddressTest;
 
     private boolean mDTMFToneEnabled;// 按键操作音
     private Object mToneGeneratorLock = new Object();// 监视器对象锁
@@ -119,7 +122,7 @@ public class MainInActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.screen_test, R.id.gps_test, R.id.photo_test, R.id.flash_test, R.id.simpleIc_test, R.id.scan_test, R.id.button_test,
-            R.id.rs_test, R.id.nfc_test,R.id.rs4_test})
+            R.id.rs_test, R.id.nfc_test, R.id.rs4_test,R.id.readaddress_test})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.screen_test:
@@ -148,7 +151,7 @@ public class MainInActivity extends AppCompatActivity {
                 goToActivity(RS232Activity.class);
                 break;
             case R.id.rs4_test:
-                MyApplication.getSession().set("rs_4",true);
+                MyApplication.getSession().set("rs_4", true);
                 Intent intentd = new Intent(this, MeterActivity.class);
                 intentd.putExtra("From", "caobiao");
                 intentd.putExtra("IS485", true);
@@ -157,6 +160,9 @@ public class MainInActivity extends AppCompatActivity {
             case R.id.nfc_test:
                 playTone(ToneGenerator.TONE_DTMF_1);
                 goToActivity(NFCActivity.class);
+                break;
+            case R.id.readaddress_test:
+                goToActivity(ReadAddress.class);
                 break;
         }
     }
@@ -183,6 +189,7 @@ public class MainInActivity extends AppCompatActivity {
             setButton();
         }
     };
+
     private void playTone(int tone) {
         if (!mDTMFToneEnabled) {
             return;
@@ -206,7 +213,7 @@ public class MainInActivity extends AppCompatActivity {
 
     @OnClick(R.id.meter_test)
     public void onClick() {
-        MyApplication.getSession().set("rs_4",false);
+        MyApplication.getSession().set("rs_4", false);
         Intent intentd = new Intent(MainInActivity.this, MeterActivity.class);
         intentd.putExtra("From", "caobiao");
         intentd.putExtra("IS485", false);

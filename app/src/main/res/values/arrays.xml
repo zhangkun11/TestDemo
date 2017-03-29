@@ -139,15 +139,8 @@
         <item>Em3095</item>
         <item>Em3070</item>
     </string-array>
-    <string-array name="butratd">
-        <item>9600</item>
-    </string-array>
-    <string-array name="eventd">
-        <item>EVEN</item>
-    </string-array>
-    <string-array name="data_bitsd">
-        <item>7</item>
-    </string-array>
+
+
     <string-array name="psam_model">
         <item>LowSpeed Card(9600)</item>
         <item>HighSpeed Card(384000)</item>
@@ -210,40 +203,6 @@
         <item>926.75 MHz</item>
         <item>927.25 MHz</item>
     </string-array>
-    <string-array name="codetype">
-        <item>Code 39</item>
-        <item>Interleaved 2 of 5</item>
-        <item>NEC 2 of 5</item>
-        <item>Code 93</item>
-        <item>Straight 2 of 5 Industrial</item>
-        <item>Straight 2 of 5 IATA</item>
-        <item>Matrix 2 of 5</item>
-        <item>Code 11</item>
-        <item>Code 128</item>
-        <item>GS1-128</item>
-        <item>UPC-A</item>
-        <item>UPC-A/EAN-13 with Extended Coupon Code</item>
-        <item>UPC-E0</item>
-        <item>UPC-E1</item>
-        <item>EAN/JAN-13</item>
-        <item>EAN/JAN-8</item>
-        <item>MSI</item>
-        <item>GS1 DataBar Omnidirectional</item>
-        <item>GS1 DataBar Limited</item>
-        <item>GS1 DataBar Expanded</item>
-        <item>Codablock A</item>
-        <item>Codablock F</item>
-        <item>PDF417</item>
-        <item>MacroPDF417</item>
-        <item>MicroPDF417</item>
-        <item>GS1 Composite Codes</item>
-        <item>TCIF Linked Code 39</item>
-        <item>QR Code</item>
-        <item>Data Matrix</item>
-        <item>MaxiCode</item>
-        <item>Aztec Code</item>
-        <item>Chinese Sensible (Han Xin) Code</item>
-        <item>Postal Codes - Linear</item>
-    </string-array>
+
 
 </resources>

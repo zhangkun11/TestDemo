@@ -56,20 +56,20 @@
 
 
             <Button
-                android:id="@+id/meter_test"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-
-                android:text="@string/meter_name" />
-
-            <Button
                 android:id="@+id/simpleIc_test"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
 
                 android:text="7 ESAM测试" />
+
+            <Button
+                android:id="@+id/meter_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+
+                android:text="@string/meter_name" />
 
             <Button
                 android:id="@+id/scan_test"
@@ -99,6 +99,13 @@
                 android:layout_margin="5dp"
 
                 android:text="11 NFC测试" />
+            <Button
+                android:id="@+id/readaddress_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+
+                android:text="读表地址" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
