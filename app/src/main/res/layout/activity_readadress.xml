@@ -25,12 +25,28 @@
             android:id="@+id/read_address"
             android:text="读取地址"/>
     </LinearLayout>
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorGrey">
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:layout_margin="5dp"
+            android:id="@+id/data_sign"
+            android:background="@drawable/bg_edittext"
+            android:layout_gravity="center_vertical"
+            android:hint="数据标识"/>
+    <Button
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:text="读取日期"
         android:id="@+id/read_btn"/>
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

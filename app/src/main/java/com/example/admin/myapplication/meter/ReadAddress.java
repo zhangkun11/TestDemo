@@ -31,12 +31,14 @@ public class ReadAddress extends AppCompatActivity {
     TextView meterInfo;
     @InjectView(R.id.read_btn)
     Button readBtn;
+    @InjectView(R.id.data_sign)
+    EditText dataSign;
 
     private byte[] sendBuffer;
     private byte[] sendBuffer2;
     private MeterController controler;
     private StringBuilder sb;
-    private byte[] address=new byte[6];
+    private byte[] address = new byte[6];
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +55,8 @@ public class ReadAddress extends AppCompatActivity {
 
             }
         });
+        dataSign.setText("04000101");
+        dataSign.setSelection(8);
     }
 
     @Override
@@ -133,14 +137,13 @@ public class ReadAddress extends AppCompatActivity {
                 SerialPortData data = new SerialPortData(buffer, size);
                 dealData(data);
             }
-            if(size==24){
+            if (size == 24) {
                 SerialPortData data = new SerialPortData(buffer, size);
                 dealData2(data);
             }
 
         }
     };
-
 
 
     private void dealData(SerialPortData data) {
@@ -221,7 +224,7 @@ public class ReadAddress extends AppCompatActivity {
 
     private void sendReadTime() {
         int length = 20;
-        String bz = "01010000";
+        String bz = dataSign.getText().toString();
         sendBuffer2 = new byte[length];
         //头部
         sendBuffer2[0] = (byte) 0xFE;
@@ -231,16 +234,18 @@ public class ReadAddress extends AppCompatActivity {
         //起始符 68H
         sendBuffer2[4] = 0x68;
         //地址域
-        if(address!=null){
-        for (int i = 5; i < 11; i++) {
-            sendBuffer2[i] = address[i - 5];
-        }}else{
-        sendBuffer2[5]=Tools.hexString2Bytes("15")[0];
-        sendBuffer2[6]=Tools.hexString2Bytes("09")[0];
-        sendBuffer2[7]=Tools.hexString2Bytes("07")[0];
-        sendBuffer2[8]=Tools.hexString2Bytes("15")[0];
-        sendBuffer2[9]=Tools.hexString2Bytes("20")[0];
-        sendBuffer2[10]=Tools.hexString2Bytes("00")[0];}
+        if (address != null) {
+            for (int i = 5; i < 11; i++) {
+                sendBuffer2[i] = address[i - 5];
+            }
+        } else {
+            sendBuffer2[5] = Tools.hexString2Bytes("15")[0];
+            sendBuffer2[6] = Tools.hexString2Bytes("09")[0];
+            sendBuffer2[7] = Tools.hexString2Bytes("07")[0];
+            sendBuffer2[8] = Tools.hexString2Bytes("15")[0];
+            sendBuffer2[9] = Tools.hexString2Bytes("20")[0];
+            sendBuffer2[10] = Tools.hexString2Bytes("00")[0];
+        }
         //起始符 68H
         sendBuffer2[11] = 0x68;
         //控制码 11H
@@ -248,30 +253,34 @@ public class ReadAddress extends AppCompatActivity {
         //数据域长度 04H
         sendBuffer2[13] = 0x04;
         //数据域
-        /*for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             int j = 2 * (4 - i);
-            sendBuffer[13 + i] = (byte) (Tools.hexString2Bytes(bz.substring(j,
+            sendBuffer2[13 + i] = (byte) (Tools.hexString2Bytes(bz.substring(j,
                     j + 2))[0] + 0x33);
-        }*/
-        sendBuffer2[14] = (byte) (Tools.hexString2Bytes("01")[0] + 0x33);
+        }
+        /*sendBuffer2[14] = (byte) (Tools.hexString2Bytes("01")[0] + 0x33);
         sendBuffer2[15] = (byte) (Tools.hexString2Bytes("01")[0] + 0x33);
         sendBuffer2[16] = (byte) (Tools.hexString2Bytes("00")[0] + 0x33);
-        sendBuffer2[17] = (byte) (Tools.hexString2Bytes("04")[0] + 0x33);
+        sendBuffer2[17] = (byte) (Tools.hexString2Bytes("04")[0] + 0x33);*/
 
 
         //校验码
-        int sumMod = 0;
+        //int sumMod = 0;
+        byte sumMod = 0x00;
         for (int i = 4; i <= length - 3; i++) {
-            sumMod += (int) sendBuffer2[i];
+            //sumMod += (int) sendBuffer2[i];
+            sumMod += sendBuffer2[i];
         }
-        sendBuffer2[length - 2] = (byte) (sumMod % 256);
+        //sendBuffer2[length - 2] = (byte) (sumMod % 256);
+        sendBuffer2[length - 2] = sumMod;
         //结束位 16H
         sendBuffer2[length - 1] = 0x16;
         Log.i("info", "sendReadAddress: " + Tools.bytesToHexString(sendBuffer2));
 
         controler.writeCommand(sendBuffer2);
     }
-    private void dealData2(SerialPortData data){
+
+    private void dealData2(SerialPortData data) {
         byte[] info = data.getDataByte();
         Log.i("info", "dealData:  info==" + Tools.bytesToHexString(info));
         if (info != null) {
@@ -288,18 +297,18 @@ public class ReadAddress extends AppCompatActivity {
 
                     if (info[x + 6] == 0x68) {
 
-                        if (info[x+7]==Tools.stringToByte("91") && info[x+8]==Tools.stringToByte("08")) {
+                        if (info[x + 7] == Tools.stringToByte("91") && info[x + 8] == Tools.stringToByte("08")) {
                             Log.i("info", "dealData:   获取成功");
                             for (int j = 0; j < 8; j++) {
                                 getA[j] = (byte) (info[x + 9 + j] - 0x33);
                             }
                             sb = new StringBuilder();
                             sb.append("数据标识：");
-                            for (int k =0; k<getA.length/2; k++) {
+                            for (int k = 0; k < getA.length / 2; k++) {
                                 sb.append(Tools.byteToString(getA[k]));
                             }
                             sb.append("\n").append("时间：(年.月.日.星期)");
-                            for(int k=getA.length-1;k>=getA.length/2;k--){
+                            for (int k = getA.length - 1; k >= getA.length / 2; k--) {
                                 sb.append(Tools.byteToString(getA[k])).append(".");
                             }
 
