@@ -25,6 +25,12 @@
             android:id="@+id/read_address"
             android:text="读取地址"/>
     </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="读取日期"
+        android:id="@+id/read_btn"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
